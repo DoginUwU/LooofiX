@@ -1,6 +1,6 @@
 import { ipcRenderer } from "electron";
 
-type IFunction = [(...args: any) => any, string];
+type IFunction = [string, (...args: any) => any];
 type ISync = [string, any[]];
 
 class SyncWindows {
@@ -15,6 +15,7 @@ class SyncWindows {
     this.functions = functions;
 
     ipcRenderer.invoke("get-sync-history").then((history: ISync[]) => {
+      console.log(history.length);
       history.forEach(([functionName, ...args]) => {
         this.sync(functionName, ...args);
         console.log("[SYNC] GET", functionName, ...args);
@@ -28,7 +29,7 @@ class SyncWindows {
   }
 
   public sync(functionName: string, ...args: any) {
-    this.functions.forEach(([func, name]) => {
+    this.functions.forEach(([name, func]) => {
       if (name === functionName) {
         func(...args);
       }
@@ -36,12 +37,6 @@ class SyncWindows {
   }
 
   public static send(functionName: string, ...args: any) {
-    if (
-      SyncWindows.instance?.functions.some(([_, name]) => name === functionName)
-    ) {
-      return;
-    }
-
     ipcRenderer.send("sync", functionName, ...args);
     console.log("[SYNC] send", functionName, ...args);
   }

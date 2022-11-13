@@ -34,7 +34,7 @@ let win: BrowserWindow | null = null;
 const store = new Store({
   name: "looofix",
 });
-const syncHistory = [];
+let syncHistory = [];
 // Here, you can also use other preload
 const preload = join(__dirname, "../preload/index.js");
 const url = process.env.VITE_DEV_SERVER_URL;
@@ -149,10 +149,12 @@ ipcMain.handle("get-sync-history", (_) => {
   return syncHistory;
 });
 
-ipcMain.on("sync", (_, ...args) => {
+ipcMain.on("sync", (event, ...args) => {
   const windows = BrowserWindow.getAllWindows();
-  windows.forEach((win) => {
+  const otherWindows = windows.filter((w) => w.id !== event.sender.id);
+  otherWindows.forEach((win) => {
     win.webContents.send("sync", ...args);
   });
+  syncHistory = syncHistory.filter(([name]) => name !== args[0]);
   syncHistory.push(args);
 });

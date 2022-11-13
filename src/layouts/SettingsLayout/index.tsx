@@ -4,11 +4,13 @@ import { useMusic } from '@/contexts/MusicContext';
 import { SyncWindows } from '@/utils/syncWindows';
 
 import style from './styles.module.scss';
+import { useYoutube } from '@/contexts/YoutubeContext';
 
 const SettingsLayout: React.FC = () => {
   const { setCurrentMusicIndex } = useMusic();
+  const { setVideoState } = useYoutube();
   const [activeTab, setActiveTab] = useState<JSX.Element | null>(null);
-  new SyncWindows([setCurrentMusicIndex, "setCurrentMusicIndex"]);
+  new SyncWindows(["setCurrentMusicIndex", setCurrentMusicIndex], ["setVideoState", setVideoState]);
 
   const handleTabChange = (tab: JSX.Element) => {
     setActiveTab(tab);

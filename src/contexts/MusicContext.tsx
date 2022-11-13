@@ -8,6 +8,7 @@ interface IMusicContext {
   currentMusic: IMusic | null;
   currentMusicIndex: number;
   setCurrentMusicIndex: (index: number) => void;
+  handleByIndexMusic: (index: number) => void;
   handleNextMusic: () => void;
   handlePreviousMusic: () => void;
 }
@@ -29,12 +30,18 @@ const MusicProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
   }
 
   const handlePreviousMusic = () => {
-    if (currentMusicIndex === 0) {
+    if (!currentMusicIndex) {
       setCurrentMusicIndex(playlist.length - 1);
       return;
     }
 
     setCurrentMusicIndex(currentMusicIndex - 1);
+  }
+
+  const handleByIndexMusic = (index: number) => {
+    if (!playlist[index]) return;
+
+    setCurrentMusicIndex(index);
   }
 
   useEffect(() => {
@@ -46,6 +53,7 @@ const MusicProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
       currentMusic,
       currentMusicIndex,
       playlist,
+      handleByIndexMusic,
       handleNextMusic,
       handlePreviousMusic,
       setCurrentMusicIndex,

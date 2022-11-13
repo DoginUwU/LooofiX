@@ -16,12 +16,25 @@
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 
     & th, td {
       padding: 12px 15px;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+
+    & td:nth-child(2),
+    & th:nth-child(2) {
+      padding: 0;
+    }
+    & td:nth-child(3) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
     }
 
     & thead {
@@ -40,11 +53,14 @@
       }
     }
 
-    & td:nth-child(1) {
-      width: 10px;
+    & p:nth-child(1) {
+      width: 400px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     & td:nth-child(3) {
-      width: 120px;
+      width: 10px;
     }
 
     & tbody {
@@ -57,4 +73,13 @@
       }
     }
   }
+}
+
+.activeMusic {
+  color: var(--link);
+}
+
+.musicDelete {
+  background-color: var(--danger);
+  color: var(--white);
 }

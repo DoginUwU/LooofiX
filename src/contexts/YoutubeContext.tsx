@@ -1,3 +1,4 @@
+import { SyncWindows } from "@/utils/syncWindows";
 import { createContext, FunctionComponent, PropsWithChildren, useContext, useEffect, useState } from "react";
 
 const YoutubeVideoStates = {
@@ -33,6 +34,10 @@ const YoutubeProvider: FunctionComponent<PropsWithChildren> = ({ children }) => 
 
     return () => clearInterval(interval);
   }, [video]);
+
+  useEffect(() => {
+    SyncWindows.send('setVideoState', videoState);
+  }, [videoState]);
 
   return (
     <YoutubeContext.Provider value={{ video, elapsed, videoState, setVideoState, setVideo }}>

@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import { Icon } from '@iconify/react';
 
 import Iframe from '@/components/Iframe';
@@ -7,8 +7,13 @@ import Player from '@/components/Player';
 import { createNewWindow } from '@/utils/window';
 
 import style from './styles.module.scss';
+import { useMusic } from '@/contexts/MusicContext';
+import { SyncWindows } from '@/utils/syncWindows';
 
 const PlayerLayout: React.FC = () => {
+  const { handleByIndexMusic } = useMusic();
+  new SyncWindows(["handleByIndexMusic", handleByIndexMusic]);
+
   return (
     <main id="draggable">
       <div className={style.topBar}>
