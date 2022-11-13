@@ -1,6 +1,5 @@
 import { IMusic } from "@/@types/music";
-import { AudioWavesHelper } from "@/components/AudioWaves/helper";
-import { DEFAULT_MUSIC_PLAYLIST } from "@/components/constants/music";
+import { DEFAULT_MUSIC_PLAYLIST } from "@/constants/music";
 import { createContext, FunctionComponent, PropsWithChildren, useContext, useState } from "react";
 
 interface IMusicContext {

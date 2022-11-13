@@ -1,0 +1,58 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  height: 100%;
+  padding: 8px;
+  border-right: 1px solid #e0e0e0;
+  gap: 4px;
+}
+
+.item {
+  background-color: var(--white);
+  border-radius: 10px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+
+  & span {
+    color: var(--black);
+    font-size: 12px;
+  }
+
+  &:hover {
+    background-color: var(--gray-300);
+  }
+}
+
+.itemIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--link);
+  color: var(--white);
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.itemActive {
+  background-color: var(--link);
+
+   & svg {
+    color: var(--white);
+  }
+
+  & span {
+    color: var(--white);
+  }
+
+  &:hover {
+    background-color: var(--link);
+  }
+}
+
+.bottom {
+  margin-top: auto;
+}

@@ -1,0 +1,60 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 12px;
+
+  & h1 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: center;
+  }
+
+  & table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+    & th, td {
+      padding: 12px 15px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    & thead {
+      background-color: var(--gray-300);
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-align: left;
+
+      & tr {
+        border-bottom: 1px solid var(--gray-300);
+      }
+
+      & tr:last-of-type {
+          border-bottom: 2px solid var(--link);
+      }
+    }
+
+    & td:nth-child(1) {
+      width: 10px;
+    }
+    & td:nth-child(3) {
+      width: 120px;
+    }
+
+    & tbody {
+      & tr {
+        border-bottom: 1px solid var(--gray-300);
+
+        &:hover {
+          background-color: var(--gray-200);
+        }
+      }
+    }
+  }
+}

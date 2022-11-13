@@ -112,8 +112,8 @@ app.on("activate", () => {
   }
 });
 
-ipcMain.handle("move-main-win", (_, xLoc, yLoc) => {
-  win.setPosition(xLoc, yLoc);
+ipcMain.handle("move-win", (_, xLoc, yLoc) => {
+  BrowserWindow.getFocusedWindow().setPosition(xLoc, yLoc);
   store.set({ position: { x: xLoc, y: yLoc } });
 });
 

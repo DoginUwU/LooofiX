@@ -1,4 +1,4 @@
-import { Wave } from "../WaveJS";
+import { Wave } from "@/utils/WaveJS";
 
 class AudioWavesHelper {
   public wave: Wave;

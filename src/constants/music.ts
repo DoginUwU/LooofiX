@@ -10,6 +10,11 @@ const DEFAULT_MUSIC_PLAYLIST: IMusic[] = [
     id: "kymEO6EhXaI",
     title: "2 Hour Nightcore Gaming Mix 2022",
   },
+  {
+    id: "T0HHAQAdnak",
+    title:
+      "Join Us For A Bite (Remastered) by JT Music (FNAF SISTER LOCATION Song) [SFM]",
+  },
 ];
 
 export { DEFAULT_MUSIC_PLAYLIST };

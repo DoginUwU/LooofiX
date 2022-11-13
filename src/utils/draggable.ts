@@ -23,7 +23,7 @@ const createDrag = () => {
       const xLoc = e.screenX - wX;
       const yLoc = e.screenY - wY;
 
-      ipcRenderer.invoke("move-main-win", xLoc, yLoc);
+      ipcRenderer.invoke("move-win", xLoc, yLoc);
     }
   };
 };
