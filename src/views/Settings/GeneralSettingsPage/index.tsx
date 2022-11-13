@@ -1,11 +1,11 @@
 import { useMusic } from '@/contexts/MusicContext';
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import Marquee from 'react-fast-marquee';
 
 import style from './styles.module.scss';
 
 const GeneralSettingsPage: React.FC = () => {
-  const { playlist, currentMusic } = useMusic();
+  const { playlist } = useMusic();
 
   return (
     <section className={style.container}>
@@ -24,9 +24,6 @@ const GeneralSettingsPage: React.FC = () => {
               <td>{music.id}</td>
               <td><Marquee gradient={false}>{music.title}</Marquee></td>
               <td>
-                {currentMusic?.id === music.id && (
-                  <button>Play</button>
-                )}
                 <button>Remove</button>
               </td>
             </tr>

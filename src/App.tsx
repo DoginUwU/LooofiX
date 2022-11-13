@@ -16,10 +16,10 @@ const App: React.FC = () => {
 
   return (
     <MusicProvider>
-        <YoutubeProvider>
+      <YoutubeProvider>
         <RouterProvider router={router} />
-        </YoutubeProvider>
-      </MusicProvider>
+      </YoutubeProvider>
+    </MusicProvider>
   )
 }
 

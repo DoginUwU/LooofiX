@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import { Icon } from '@iconify/react';
 
 import Iframe from '@/components/Iframe';
