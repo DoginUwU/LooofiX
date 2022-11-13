@@ -8,7 +8,6 @@
   position: relative;
   width: 100vw;
   height: 100vh;
-  -webkit-app-region: drag;
   padding: 0 20px;
 }
 
@@ -22,14 +21,12 @@
   user-select: none;
   width: 100%;
   overflow: hidden;
-  -webkit-app-region: drag;
 
   & .title {
     font-weight: 600;
     font-size: 12px;
     line-height: 12px;
     color: var(--text-primary);
-    -webkit-app-region: drag;
   }
 
   & h2 {
@@ -38,7 +35,6 @@
     line-height: 12px;
     color: var(--text-primary);
     user-select: none;
-    -webkit-app-region: drag;
   }
 }
 

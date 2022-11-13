@@ -1,20 +1,22 @@
 import { useEffect } from 'react'
-import Iframe from './components/Iframe'
-import Player from './components/Player'
+
 import { MusicProvider } from './contexts/MusicContext'
 import { YoutubeProvider } from './contexts/YoutubeContext'
+import PlayerLayout from './layouts/PlayerLayout'
+
+import { createDrag } from './utils/draggable'
 
 const App: React.FC = () => {
 
   useEffect(() => {
+    createDrag();
     import('./styles/lightTheme');
   }, []);
 
   return (
     <MusicProvider>
       <YoutubeProvider>
-        <Iframe />
-        <Player />
+        <PlayerLayout />
       </YoutubeProvider>
     </MusicProvider>
   )

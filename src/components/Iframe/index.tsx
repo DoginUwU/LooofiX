@@ -1,6 +1,6 @@
 import { useMusic } from '@/contexts/MusicContext';
 import { useYoutube } from '@/contexts/YoutubeContext';
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 
 const Iframe: React.FC = () => {
   const { currentMusic } = useMusic();
@@ -53,4 +53,4 @@ const Iframe: React.FC = () => {
   return <div id='player' />;
 }
 
-export default Iframe;
+export default memo(Iframe);

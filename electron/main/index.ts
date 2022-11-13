@@ -99,9 +99,18 @@ app.on("activate", () => {
   }
 });
 
+ipcMain.handle("move-main-win", (event, xLoc, yLoc) => {
+  win.setPosition(xLoc, yLoc);
+});
+
 // new window example arg: new windows url
-ipcMain.handle("open-win", (event, arg) => {
+ipcMain.handle("open-win", (event, route) => {
   const childWindow = new BrowserWindow({
+    frame: false,
+    roundedCorners: true,
+    transparent: true,
+    resizable: false,
+    fullscreenable: false,
     webPreferences: {
       preload,
       nodeIntegration: true,
@@ -110,9 +119,10 @@ ipcMain.handle("open-win", (event, arg) => {
   });
 
   if (app.isPackaged) {
-    childWindow.loadFile(indexHtml, { hash: arg });
+    childWindow.loadFile(indexHtml, { hash: route });
   } else {
-    childWindow.loadURL(`${url}#${arg}`);
+    console.log(`${url}${route}`);
+    childWindow.loadURL(`${url}${route}`);
     // childWindow.webContents.openDevTools({ mode: "undocked", activate: true })
   }
 });

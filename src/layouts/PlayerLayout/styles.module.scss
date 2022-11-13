@@ -1,0 +1,24 @@
+.topBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 5px 12px;
+  z-index: 999;
+
+  & button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: var(--text-primary);
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}

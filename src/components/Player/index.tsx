@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Icon } from '@iconify/react';
 import Marquee from "react-fast-marquee";
 
@@ -7,7 +7,7 @@ import { useMusic } from '@/contexts/MusicContext';
 import { formatElapsedTime, getPlayButtonIcon } from './helper';
 import AudioWaves from '../AudioWaves';
 
-import styles from './styles.module.scss';
+import style from './styles.module.scss';
 
 const Player: React.FC = () => {
   const { video, elapsed, videoState } = useYoutube();
@@ -29,12 +29,12 @@ const Player: React.FC = () => {
     }
   }
 
-  return <main className={styles.container}>
-    <div className={styles.header}>
+  return <section className={style.container}>
+    <div className={style.header}>
       <Marquee className='title' gradientWidth={50}>{video.videoTitle}</Marquee>
       <h2>{formatElapsedTime(elapsed)} elapsed in LooofiX</h2>
     </div>
-    <div className={styles.controls}>
+    <div className={style.controls}>
       <button onClick={handlePreviousMusic}>
         <Icon icon="mdi:skip-previous" fontSize={32} />
       </button>
@@ -46,7 +46,7 @@ const Player: React.FC = () => {
       </button>
     </div>
     <AudioWaves />
-  </main>
+  </section>
 }
 
-export default Player;
+export default memo(Player);
