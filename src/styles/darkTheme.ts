@@ -1,8 +1,8 @@
 import { ITheme } from "@/@types/theme";
 
 const THEME: ITheme = {
-  primary: "#023e8a",
-  secondary: "#0096c7",
+  primary: "#1a1919",
+  secondary: "#262626",
   bgPrimary: "#383838",
   bgSecondary: "#000",
 };
