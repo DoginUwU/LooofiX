@@ -16,7 +16,7 @@ interface IThemeContext {
 const ThemeContext = createContext<IThemeContext>({} as IThemeContext);
 
 const ThemeProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
-  const [themeString, setThemeString] = useState<AvailableThemes>("light");
+  const [themeString, setThemeString] = useState<AvailableThemes>("dark");
   const theme = themeString === "light" ? lightTheme() : darkTheme();
 
   const handleTheme = (theme: AvailableThemes, __syncCall?: boolean) => {

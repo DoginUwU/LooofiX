@@ -33,7 +33,7 @@ class AudioWavesHelper {
     this.wave.addAnimation(
       new this.wave.animations.Wave({
         fillColor: this.theme?.secondary,
-        lineColor: Color(this.theme?.secondary).darken(0.2).hex(),
+        lineColor: "transparent",
         rounded: true,
         count: 20,
         frequencyBand: "base",
@@ -42,7 +42,7 @@ class AudioWavesHelper {
     this.wave.addAnimation(
       new this.wave.animations.Wave({
         fillColor: Color(this.theme?.primary).alpha(0.5).hsl().string(),
-        lineColor: Color(this.theme?.primary).darken(0.2).hex(),
+        lineColor: "transparent",
         rounded: true,
         count: 20,
         frequencyBand: "lows",

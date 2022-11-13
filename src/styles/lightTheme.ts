@@ -2,8 +2,8 @@ import { ITheme } from "@/@types/theme";
 import "./light.theme.scss";
 
 const THEME: ITheme = {
-  primary: "#71B8EF",
-  secondary: "#AAEDF2",
+  primary: "#00b4d8",
+  secondary: "#90e0ef",
   bgPrimary: "#fff",
   bgSecondary: "#000",
 };
