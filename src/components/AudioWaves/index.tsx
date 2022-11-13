@@ -22,7 +22,7 @@ const AudioWaves: React.FC = () => {
     try {
       new AudioWavesHelper(canvas, videoElement)
     } catch (error) {
-      setInterval(() => {
+      setTimeout(() => {
         new AudioWavesHelper(canvas, videoElement)
       }, 5000)
     }

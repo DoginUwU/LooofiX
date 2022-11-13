@@ -22,7 +22,7 @@ const Iframe: React.FC = () => {
       new YT.Player('player', {
         height: '0',
         width: '0',
-        videoId: 't0cxI-hmxMo',
+        videoId: '5OeSk8-uwcU',
         events: {
           onReady: onPlayerReady,
           onStateChange: onPlayerStateChange,
@@ -36,7 +36,6 @@ const Iframe: React.FC = () => {
   }
 
   const onPlayerStateChange = (event: YoutubeEvent) => {
-    console.log('onPlayerStateChange', event);
     setVideoState(event.target.getPlayerState());
   }
 

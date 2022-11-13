@@ -19,6 +19,9 @@ export type AudioElement =
       source: MediaElementAudioSourceNode;
     };
 
+let _audioSource!: MediaElementAudioSourceNode;
+let _audioContext!: AudioContext;
+let _audioAnalyser!: AnalyserNode;
 export class Wave {
   public animations = {
     Wave: WaveAnimation,
@@ -27,9 +30,6 @@ export class Wave {
   private _audioElement!: HTMLAudioElement;
   private _canvasElement: HTMLCanvasElement;
   private _canvasContext: CanvasRenderingContext2D;
-  private _audioContext!: AudioContext;
-  private _audioSource!: MediaElementAudioSourceNode;
-  private _audioAnalyser!: AnalyserNode;
 
   constructor(
     videoElement: HTMLVideoElement,
@@ -40,24 +40,24 @@ export class Wave {
     this._canvasContext = this._canvasElement.getContext("2d");
 
     this._audioElement = videoElement;
-    this._audioContext = new AudioContext();
-    this._audioSource = this._audioContext.createMediaElementSource(
-      this._audioElement
-    );
-    this._audioAnalyser = this._audioContext.createAnalyser();
+    if (!_audioSource) {
+      _audioContext = new AudioContext();
+      _audioSource = _audioContext.createMediaElementSource(this._audioElement);
+      _audioAnalyser = _audioContext.createAnalyser();
+    }
 
     this._play();
   }
 
   private _play(): void {
-    this._audioSource.connect(this._audioAnalyser);
-    this._audioSource.connect(this._audioContext.destination);
-    this._audioAnalyser.smoothingTimeConstant = 0.85;
-    this._audioAnalyser.fftSize = 1024;
-    let audioBufferData = new Uint8Array(this._audioAnalyser.frequencyBinCount);
+    _audioSource.connect(_audioAnalyser);
+    _audioSource.connect(_audioContext.destination);
+    _audioAnalyser.smoothingTimeConstant = 0.85;
+    _audioAnalyser.fftSize = 1024;
+    let audioBufferData = new Uint8Array(_audioAnalyser.frequencyBinCount);
 
     let tick = () => {
-      this._audioAnalyser.getByteFrequencyData(audioBufferData);
+      _audioAnalyser.getByteFrequencyData(audioBufferData);
       this._canvasContext.clearRect(
         0,
         0,
