@@ -1,7 +1,11 @@
 import { ipcRenderer } from "electron";
 
-const createNewWindow = () => {
+const createNewWindow = async () => {
   ipcRenderer.invoke("open-win", "settings");
 };
 
-export { createNewWindow };
+const closeWindow = (winId?: number) => {
+  ipcRenderer.invoke("close-win", winId);
+};
+
+export { createNewWindow, closeWindow };

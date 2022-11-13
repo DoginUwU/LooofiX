@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
+import { RouterProvider } from 'react-router-dom'
 
 import { MusicProvider } from './contexts/MusicContext'
 import { YoutubeProvider } from './contexts/YoutubeContext'
-import PlayerLayout from './layouts/PlayerLayout'
+import { router } from './routes'
 
 import { createDrag } from './utils/draggable'
 
@@ -15,10 +16,10 @@ const App: React.FC = () => {
 
   return (
     <MusicProvider>
-      <YoutubeProvider>
-        <PlayerLayout />
-      </YoutubeProvider>
-    </MusicProvider>
+        <YoutubeProvider>
+        <RouterProvider router={router} />
+        </YoutubeProvider>
+      </MusicProvider>
   )
 }
 

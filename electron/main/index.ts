@@ -17,6 +17,7 @@ process.env.PUBLIC = app.isPackaged
 import { app, BrowserWindow, shell, ipcMain } from "electron";
 import { release } from "os";
 import { join } from "path";
+import Store from "electron-store";
 
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith("6.1")) app.disableHardwareAcceleration();
@@ -30,6 +31,10 @@ if (!app.requestSingleInstanceLock()) {
 }
 
 let win: BrowserWindow | null = null;
+const childWindows: BrowserWindow[] = [];
+const store = new Store({
+  name: "looofix",
+});
 // Here, you can also use other preload
 const preload = join(__dirname, "../preload/index.js");
 const url = process.env.VITE_DEV_SERVER_URL;
@@ -71,6 +76,14 @@ async function createWindow() {
     if (url.startsWith("https:")) shell.openExternal(url);
     return { action: "deny" };
   });
+
+  const posX = store.get("position.x");
+  const posY = store.get("position.y");
+
+  if (posX && posY) {
+    // @ts-ignore
+    win.setPosition(posX, posY);
+  }
 }
 
 app.whenReady().then(createWindow);
@@ -99,12 +112,13 @@ app.on("activate", () => {
   }
 });
 
-ipcMain.handle("move-main-win", (event, xLoc, yLoc) => {
+ipcMain.handle("move-main-win", (_, xLoc, yLoc) => {
   win.setPosition(xLoc, yLoc);
+  store.set({ position: { x: xLoc, y: yLoc } });
 });
 
 // new window example arg: new windows url
-ipcMain.handle("open-win", (event, route) => {
+ipcMain.handle("open-win", (_, route) => {
   const childWindow = new BrowserWindow({
     frame: false,
     roundedCorners: true,
@@ -121,8 +135,19 @@ ipcMain.handle("open-win", (event, route) => {
   if (app.isPackaged) {
     childWindow.loadFile(indexHtml, { hash: route });
   } else {
-    console.log(`${url}${route}`);
     childWindow.loadURL(`${url}${route}`);
-    // childWindow.webContents.openDevTools({ mode: "undocked", activate: true })
+  }
+
+  childWindows.push(childWindow);
+
+  return childWindow.id;
+});
+
+ipcMain.handle("close-win", (_, winId) => {
+  if (winId) {
+    const childWindow = childWindows.find((win) => win.id === winId);
+    childWindow?.close();
+  } else {
+    BrowserWindow.getFocusedWindow()?.close();
   }
 });

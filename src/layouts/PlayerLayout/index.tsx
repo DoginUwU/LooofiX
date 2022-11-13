@@ -4,8 +4,9 @@ import { Icon } from '@iconify/react';
 import Iframe from '@/components/Iframe';
 import Player from '@/components/Player';
 
-import style from './styles.module.scss';
 import { createNewWindow } from '@/utils/window';
+
+import style from './styles.module.scss';
 
 const PlayerLayout: React.FC = () => {
   return (

@@ -1,0 +1,101 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.topBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  border-radius: 20px 20px 0 0;
+  background-color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-app-region: drag;
+  user-select: none;
+
+  & h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--white);
+    text-align: center;
+    line-height: 50px;
+    -webkit-app-region: drag;
+  }
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 0;
+  gap: 20px;
+}
+
+.themeCards {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 12px;
+}
+
+.themeCard {
+  background-color: var(--gray-300);
+  border-radius: 12px;
+  padding: 10px 10px 4px 10px;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  &:hover {
+    img {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.themeCardActive {
+  border: 4px solid var(--primary);
+}
+
+// .profile {
+//   border: 1px solid var(--gray-300);
+//   border-radius: 12px;
+//   display: flex;
+//   align-items: center;
+//   gap: 18px;
+//   padding: 10px;
+
+//   & img {
+//     width: 58px;
+//     height: 58px;
+//     object-fit: cover;
+//     border-radius: 999px;
+//   }
+
+//   & h1 {
+//     color: var(--text-primary);
+//     font-weight: 600;
+//     font-size: 20px;
+//   }
+// }
