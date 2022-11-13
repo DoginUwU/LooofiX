@@ -18,7 +18,7 @@ const Player: React.FC = () => {
 
   return <section className={style.container}>
     <div className={style.header}>
-      <Marquee className='title' gradientWidth={50}>{video.videoTitle || 'Buffering...'}</Marquee>
+      <Marquee className='title' gradientWidth={50}>{video.videoTitle || 'Buffering...'} </Marquee>
       <h2>{formatElapsedTime(elapsed)} elapsed in LooofiX</h2>
     </div>
     <div className={style.controls}>

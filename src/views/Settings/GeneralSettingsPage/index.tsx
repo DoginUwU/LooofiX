@@ -66,7 +66,7 @@ const GeneralSettingsPage: React.FC = () => {
                   </Tooltip>
                 </td>
                 <td>
-                  <Button className={style.musicDelete}>
+                  <Button className={style.musicDelete} disabled>
                     <Icon icon="fluent:delete-24-filled" />
                   </Button>
                 </td>
