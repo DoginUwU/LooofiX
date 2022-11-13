@@ -1,7 +1,10 @@
-import { IMusic } from "@/@types/music";
-import { DEFAULT_MUSIC_PLAYLIST } from "@/constants/music";
-import { SyncWindows } from "@/utils/syncWindows";
 import { createContext, FunctionComponent, PropsWithChildren, useContext, useState } from "react";
+
+import { IMusic } from "@/@types/music";
+
+import { DEFAULT_MUSIC_PLAYLIST } from "@/constants/music";
+
+import { SyncWindows } from "@/utils/syncWindows";
 
 interface IMusicContext {
   playlist: IMusic[];

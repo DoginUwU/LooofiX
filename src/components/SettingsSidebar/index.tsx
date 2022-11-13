@@ -1,6 +1,8 @@
-import { cx } from '@/utils/cx';
-import { Icon } from '@iconify/react';
 import { FC, useEffect, useState } from 'react';
+import { Icon } from '@iconify/react';
+
+import { cx } from '@/utils/cx';
+
 import { ITEMS } from './helper';
 
 import style from './styles.module.scss';

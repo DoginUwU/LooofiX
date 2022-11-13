@@ -1,5 +1,6 @@
-import { SyncWindows } from "@/utils/syncWindows";
 import { createContext, FunctionComponent, PropsWithChildren, useContext, useEffect, useState } from "react";
+
+import { SyncWindows } from "@/utils/syncWindows";
 
 const YoutubeVideoStates = {
   UNSTARTED: -1,

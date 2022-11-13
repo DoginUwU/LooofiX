@@ -1,13 +1,16 @@
-import Button from '@/components/Button';
-import { useMusic } from '@/contexts/MusicContext';
+import React, { memo } from 'react';
 import { Icon } from '@iconify/react';
-import React, { createElement, memo } from 'react';
 import { Provider as TooltipProvider } from '@radix-ui/react-tooltip';
 
-import style from './styles.module.scss';
+import Button from '@/components/Button';
 import Tooltip from '@/components/Tooltip';
-import { cx } from '@/utils/cx';
+
 import { useYoutube, YoutubeVideoStates } from '@/contexts/YoutubeContext';
+import { useMusic } from '@/contexts/MusicContext';
+
+import { cx } from '@/utils/cx';
+
+import style from './styles.module.scss';
 
 const GeneralSettingsPage: React.FC = () => {
   const { playlist, currentMusicIndex, handleByIndexMusic } = useMusic();

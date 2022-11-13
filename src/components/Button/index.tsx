@@ -1,5 +1,6 @@
-import { cx } from '@/utils/cx';
 import React from 'react';
+
+import { cx } from '@/utils/cx';
 
 import style from './styles.module.scss';
 

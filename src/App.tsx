@@ -3,6 +3,7 @@ import { RouterProvider } from 'react-router-dom'
 
 import { MusicProvider } from './contexts/MusicContext'
 import { YoutubeProvider } from './contexts/YoutubeContext'
+
 import { router } from './routes'
 
 import { createDrag } from './utils/draggable'

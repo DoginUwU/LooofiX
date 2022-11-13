@@ -1,5 +1,7 @@
-import { useYoutube, YoutubeVideoStates } from '@/contexts/YoutubeContext';
 import React, { useEffect } from 'react';
+
+import { useYoutube, YoutubeVideoStates } from '@/contexts/YoutubeContext';
+
 import { AudioWavesHelper } from './helper';
 
 import style from './styles.module.scss';

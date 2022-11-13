@@ -1,10 +1,13 @@
 import React, { memo, useState } from 'react';
+
 import SettingsSidebar from '@/components/SettingsSidebar';
+
 import { useMusic } from '@/contexts/MusicContext';
+import { useYoutube } from '@/contexts/YoutubeContext';
+
 import { SyncWindows } from '@/utils/syncWindows';
 
 import style from './styles.module.scss';
-import { useYoutube } from '@/contexts/YoutubeContext';
 
 const SettingsLayout: React.FC = () => {
   const [activeTab, setActiveTab] = useState<JSX.Element | null>(null);
