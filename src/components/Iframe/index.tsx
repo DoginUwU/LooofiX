@@ -1,8 +1,10 @@
+import { useMusic } from '@/contexts/MusicContext';
 import { useYoutube } from '@/contexts/YoutubeContext';
 import React, { useEffect } from 'react';
 
 const Iframe: React.FC = () => {
-  const { setVideo, setVideoState } = useYoutube();
+  const { currentMusic } = useMusic();
+  const { setVideo, setVideoState, video } = useYoutube();
 
   const syncYoutubeApi = () => {
     if (document.getElementById('youtube-api')) {
@@ -22,7 +24,6 @@ const Iframe: React.FC = () => {
       new YT.Player('player', {
         height: '0',
         width: '0',
-        videoId: '5OeSk8-uwcU',
         events: {
           onReady: onPlayerReady,
           onStateChange: onPlayerStateChange,
@@ -42,6 +43,12 @@ const Iframe: React.FC = () => {
   useEffect(() => {
     syncYoutubeApi();
   }, []);
+
+  useEffect(() => {
+    if (!currentMusic || !video) return;
+
+    video.loadVideoById(currentMusic.id, 0, 'large');
+  }, [currentMusic, video]);
 
   return <div id='player' />;
 }

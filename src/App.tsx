@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import Iframe from './components/Iframe'
 import Player from './components/Player'
+import { MusicProvider } from './contexts/MusicContext'
 import { YoutubeProvider } from './contexts/YoutubeContext'
 
 const App: React.FC = () => {
@@ -10,10 +11,12 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <YoutubeProvider>
-      <Iframe />
-      <Player />
-    </YoutubeProvider>
+    <MusicProvider>
+      <YoutubeProvider>
+        <Iframe />
+        <Player />
+      </YoutubeProvider>
+    </MusicProvider>
   )
 }
 
