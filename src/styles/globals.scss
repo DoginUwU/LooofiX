@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Poppins, sans-serif;
+  -webkit-app-region: no-drag
+}
+
+:root {
+  --white: #fff;
+  --black: #000;
+  --text-primary: #4E4E4E;
+  --text-secondary: #383838;
+  --primary: #71B8EF;
+  --secondary: #AAEDF2;
+}
+
+#root {
+  background-color: var(--white);
+  border-radius: 50px;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  -webkit-app-region: drag;
+  overflow: hidden;
+}
+
+button, a {
+  cursor: pointer;
+}
+
+iframe {
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+}
