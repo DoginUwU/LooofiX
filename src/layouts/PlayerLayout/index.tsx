@@ -12,14 +12,9 @@ import { SyncWindows } from '@/utils/syncWindows';
 import { useYoutube } from '@/contexts/YoutubeContext';
 
 const PlayerLayout: React.FC = () => {
-  const { handleByIndexMusic } = useMusic();
-  const { handlePlay } = useYoutube();
-  const call = useYoutube();
-  new SyncWindows(["handleByIndexMusic", handleByIndexMusic], ["handlePlay", handlePlay]);
-
-  useEffect(() => {
-    console.log(call["handlePlay"]());
-  }, []);
+  const useMusicCtx = useMusic();
+  const useYoutubeCtx = useYoutube();
+  new SyncWindows(useYoutubeCtx, useMusicCtx);
 
   return (
     <main id="draggable">

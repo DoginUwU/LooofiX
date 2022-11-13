@@ -7,10 +7,10 @@ import style from './styles.module.scss';
 import { useYoutube } from '@/contexts/YoutubeContext';
 
 const SettingsLayout: React.FC = () => {
-  const { setCurrentMusicIndex } = useMusic();
-  const { handleVideoStateChange } = useYoutube();
   const [activeTab, setActiveTab] = useState<JSX.Element | null>(null);
-  new SyncWindows(["setCurrentMusicIndex", setCurrentMusicIndex], ["handleVideoStateChange", handleVideoStateChange]);
+  const useMusicCtx = useMusic();
+  const useYoutubeCtx = useYoutube();
+  new SyncWindows(useYoutubeCtx, useMusicCtx);
 
   const handleTabChange = (tab: JSX.Element) => {
     setActiveTab(tab);

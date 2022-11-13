@@ -1,13 +1,16 @@
 import { ipcRenderer } from "electron";
 
-type IFunction = [string, (...args: any) => any];
 type ISync = [string, any[]];
 
+interface IContexts {
+  [key: string]: any;
+}
+
 class SyncWindows {
-  private functions: Array<IFunction> = [];
+  private functions: Array<IContexts> = [];
   public static instance: SyncWindows;
 
-  constructor(...functions: Array<IFunction>) {
+  constructor(...functions: Array<IContexts>) {
     if (SyncWindows.instance) return;
     console.log("[SYNC] initialized on new Window");
 
@@ -28,9 +31,11 @@ class SyncWindows {
   }
 
   public sync(functionName: string, ...args: any) {
-    this.functions.forEach(([name, func]) => {
-      if (name === functionName) {
-        func(...args, true);
+    this.functions.forEach((funcs) => {
+      if (funcs.hasOwnProperty(functionName)) {
+        if (typeof funcs[functionName] === "function") {
+          funcs[functionName](...args, true);
+        }
       }
     });
   }
