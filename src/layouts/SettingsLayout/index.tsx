@@ -17,7 +17,7 @@ const SettingsLayout: React.FC = () => {
   }
 
   return (
-    <main className={style.container} id="draggable">
+    <main className={style.container}>
       <div className={style.topBar}>
         <h1>Settings</h1>
       </div>

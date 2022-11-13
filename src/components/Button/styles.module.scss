@@ -12,4 +12,9 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
 }

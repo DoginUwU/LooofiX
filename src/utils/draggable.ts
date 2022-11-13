@@ -18,7 +18,7 @@ const createDrag = () => {
     dragging = false;
   };
 
-  draggable.onmousemove = (e) => {
+  window.onmousemove = (e) => {
     if (dragging) {
       const xLoc = e.screenX - wX;
       const yLoc = e.screenY - wY;

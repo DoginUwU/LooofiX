@@ -1,18 +1,33 @@
 import { Wave } from "@/utils/WaveJS";
+import { ipcRenderer } from "electron";
 
 class AudioWavesHelper {
   public wave: Wave;
 
-  constructor(canvas?: HTMLCanvasElement, video?: HTMLVideoElement) {
-    if (!canvas) {
+  constructor(
+    private canvas?: HTMLCanvasElement,
+    private video?: HTMLVideoElement
+  ) {
+    if (!this.canvas) {
       throw new Error("No canvas element provided");
     }
-    if (!video) {
+    if (!this.video) {
       throw new Error("No video element provided");
     }
 
-    this.wave = new Wave(video, canvas);
+    this.wave = new Wave(this.video, this.canvas);
 
+    this.createAnimations();
+
+    ipcRenderer.on("blur", () => {
+      this.blur();
+    });
+    ipcRenderer.on("focus", () => {
+      this.unblur();
+    });
+  }
+
+  public createAnimations() {
     this.wave.addAnimation(
       new this.wave.animations.Wave({
         fillColor: "#AAEDF2",
@@ -33,7 +48,20 @@ class AudioWavesHelper {
     );
   }
 
-  public init() {}
+  public blur() {
+    this.wave.clearAnimations();
+
+    if (!this.canvas) return;
+
+    this.canvas.style.display = "none";
+  }
+
+  public unblur() {
+    if (!this.canvas) return;
+
+    this.canvas.style.display = "block";
+    this.createAnimations();
+  }
 }
 
 export { AudioWavesHelper };

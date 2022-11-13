@@ -84,6 +84,13 @@ async function createWindow() {
     // @ts-ignore
     win.setPosition(posX, posY);
   }
+
+  win.on("blur", () => {
+    win.webContents.send("blur");
+  });
+  win.on("focus", () => {
+    win.webContents.send("focus");
+  });
 }
 
 app.whenReady().then(createWindow);

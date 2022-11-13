@@ -38,7 +38,7 @@ const GeneralSettingsPage: React.FC = () => {
   return (
     <TooltipProvider>
       <section className={style.container}>
-        <h1>Your Saved Musics</h1>
+        <h1>Your Saved Songs</h1>
         <table>
           <thead>
             <tr>
@@ -69,6 +69,9 @@ const GeneralSettingsPage: React.FC = () => {
             ))}
           </tbody>
         </table>
+        <Button className={style.findMoreButton} disabled>
+          Find more songs (soon)
+        </Button>
       </section>
     </TooltipProvider>
   );

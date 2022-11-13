@@ -83,3 +83,15 @@
   background-color: var(--danger);
   color: var(--white);
 }
+
+.findMoreButton {
+  background-color: var(--link);
+  color: var(--white);
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+  padding: 12px 0;
+
+  &:hover {
+    background-color: var(--link-hover);
+  }
+}
