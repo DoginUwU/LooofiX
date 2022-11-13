@@ -15,23 +15,22 @@ class SyncWindows {
     this.functions = functions;
 
     ipcRenderer.invoke("get-sync-history").then((history: ISync[]) => {
-      console.log(history.length);
       history.forEach(([functionName, ...args]) => {
         this.sync(functionName, ...args);
-        console.log("[SYNC] GET", functionName, ...args);
+        console.log("[SYNC] GET 1", functionName, ...args);
       });
     });
 
-    ipcRenderer.on("sync", (_, functionName, ...args) => {
+    ipcRenderer.on("sync-internal", (_, functionName, ...args) => {
       this.sync(functionName, ...args);
-      console.log("[SYNC] GET", functionName, ...args);
+      console.log("[SYNC] GET 2", functionName, ...args);
     });
   }
 
   public sync(functionName: string, ...args: any) {
     this.functions.forEach(([name, func]) => {
       if (name === functionName) {
-        func(...args);
+        func(...args, true);
       }
     });
   }

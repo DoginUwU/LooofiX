@@ -1,7 +1,7 @@
 import { IMusic } from "@/@types/music";
 import { DEFAULT_MUSIC_PLAYLIST } from "@/constants/music";
 import { SyncWindows } from "@/utils/syncWindows";
-import { createContext, FunctionComponent, PropsWithChildren, useContext, useEffect, useState } from "react";
+import { createContext, FunctionComponent, PropsWithChildren, useContext, useState } from "react";
 
 interface IMusicContext {
   playlist: IMusic[];
@@ -20,33 +20,32 @@ const MusicProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
   const [currentMusicIndex, setCurrentMusicIndex] = useState<number>(0);
   const currentMusic = playlist[currentMusicIndex];
 
-  const handleNextMusic = () => {
+  const handleNextMusic = (__syncCall?: boolean) => {
+    let nextMusicIndex = currentMusicIndex + 1;
     if (currentMusicIndex === playlist.length - 1) {
-      setCurrentMusicIndex(0);
-      return;
+      nextMusicIndex = 0;
     }
 
-    setCurrentMusicIndex(currentMusicIndex + 1);
+    setCurrentMusicIndex(nextMusicIndex);
+    if(!__syncCall) SyncWindows.send('setCurrentMusicIndex', nextMusicIndex);
   }
 
-  const handlePreviousMusic = () => {
+  const handlePreviousMusic = (__syncCall?: boolean) => {
+    let previousMusicIndex = currentMusicIndex - 1;
     if (!currentMusicIndex) {
-      setCurrentMusicIndex(playlist.length - 1);
-      return;
+      previousMusicIndex = playlist.length - 1;
     }
 
-    setCurrentMusicIndex(currentMusicIndex - 1);
+    setCurrentMusicIndex(previousMusicIndex);
+    if(!__syncCall) SyncWindows.send('setCurrentMusicIndex', previousMusicIndex);
   }
 
-  const handleByIndexMusic = (index: number) => {
+  const handleByIndexMusic = (index: number, __syncCall?: boolean) => {
     if (!playlist[index]) return;
 
     setCurrentMusicIndex(index);
+    if(!__syncCall) SyncWindows.send('handleByIndexMusic', index);
   }
-
-  useEffect(() => {
-    SyncWindows.send('setCurrentMusicIndex', currentMusicIndex);
-  }, [currentMusicIndex]);
 
   return (
     <MusicContext.Provider value={{

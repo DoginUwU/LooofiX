@@ -8,16 +8,15 @@ import style from './styles.module.scss';
 import Tooltip from '@/components/Tooltip';
 import { cx } from '@/utils/cx';
 import { useYoutube, YoutubeVideoStates } from '@/contexts/YoutubeContext';
-import { SyncWindows } from '@/utils/syncWindows';
 
 const GeneralSettingsPage: React.FC = () => {
-  const { playlist, currentMusic, handleByIndexMusic } = useMusic();
-  const { videoState } = useYoutube();
+  const { playlist, currentMusicIndex, handleByIndexMusic } = useMusic();
+  const { videoState, handlePlay } = useYoutube();
 
-  const isMusicActive = (id: string) => currentMusic?.id === id;
+  const isMusicActive = (index: number) => currentMusicIndex === index;
 
-  const PlayIcon: React.FC<any> = ({ musicId }) => {
-    if (!isMusicActive(musicId)) return <Icon icon="mdi:play" fontSize={18} />;
+  const PlayIcon: React.FC<any> = ({ index }) => {
+    if (!isMusicActive(index)) return <Icon icon="mdi:play" fontSize={18} />;
 
     switch (videoState) {
       case YoutubeVideoStates.PLAYING:
@@ -31,8 +30,11 @@ const GeneralSettingsPage: React.FC = () => {
   }
 
   const handlePlayMusic = (index: number) => {
-    SyncWindows.send('handleByIndexMusic', index);
-    handleByIndexMusic(index)
+    if (isMusicActive(index)) {
+      handlePlay();
+    } else {
+      handleByIndexMusic(index);
+    }
   }
 
   return (
@@ -49,10 +51,10 @@ const GeneralSettingsPage: React.FC = () => {
           </thead>
           <tbody>
             {playlist.map((music, index) => (
-              <tr key={music.id} className={cx({ [style.activeMusic]: isMusicActive(music.id) })}>
+              <tr key={music.id} className={cx({ [style.activeMusic]: isMusicActive(index) })}>
                 <td>
                   <Button onClick={() => handlePlayMusic(index)}>
-                    <PlayIcon musicId={music.id} />
+                    <PlayIcon index={index} />
                   </Button>
                 </td>
                 <td>

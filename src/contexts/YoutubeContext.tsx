@@ -12,10 +12,11 @@ const YoutubeVideoStates = {
 
 interface IYoutubeContext {
   video: YoutubeVideo | null;
-  setVideo: (video: YoutubeVideo | null) => void;
   videoState: number;
-  setVideoState: (videoState: number) => void;
   elapsed: number;
+  handlePlay: () => void;
+  handleVideoStateChange: (state: number) => void;
+  handleVideo: (video: YoutubeVideo) => void;
 }
 
 const YoutubeContext = createContext<IYoutubeContext>({} as IYoutubeContext);
@@ -24,6 +25,32 @@ const YoutubeProvider: FunctionComponent<PropsWithChildren> = ({ children }) => 
   const [video, setVideo] = useState<YoutubeVideo | null>(null);
   const [videoState, setVideoState] = useState<number>(YoutubeVideoStates.UNSTARTED);
   const [elapsed, setElapsed] = useState(0);
+
+  const handlePlay = (__syncCall?: boolean) => {
+    switch (videoState) {
+      case YoutubeVideoStates.PLAYING:
+        video?.pauseVideo();
+        break;
+
+      case YoutubeVideoStates.UNSTARTED:
+      case YoutubeVideoStates.PAUSED:
+      case YoutubeVideoStates.BUFFERING:
+        video?.playVideo();
+        break;
+    }
+
+    if(!__syncCall) SyncWindows.send('handlePlay');
+  }
+
+  const handleVideoStateChange = (state: number, __syncCall?: boolean) => {
+    setVideoState(state);
+
+    if(!__syncCall) SyncWindows.send('handleVideoStateChange', state);
+  }
+
+  const handleVideo = (video: YoutubeVideo | null, __syncCall?: boolean) => {
+    setVideo(video);
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -35,12 +62,8 @@ const YoutubeProvider: FunctionComponent<PropsWithChildren> = ({ children }) => 
     return () => clearInterval(interval);
   }, [video]);
 
-  useEffect(() => {
-    SyncWindows.send('setVideoState', videoState);
-  }, [videoState]);
-
   return (
-    <YoutubeContext.Provider value={{ video, elapsed, videoState, setVideoState, setVideo }}>
+    <YoutubeContext.Provider value={{ video, elapsed, videoState, handlePlay, handleVideoStateChange, handleVideo }}>
       {children}
     </YoutubeContext.Provider>
   );

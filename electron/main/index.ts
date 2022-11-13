@@ -84,13 +84,6 @@ async function createWindow() {
     // @ts-ignore
     win.setPosition(posX, posY);
   }
-
-  win.on("blur", () => {
-    win.webContents.send("blur");
-  });
-  win.on("focus", () => {
-    win.webContents.send("focus");
-  });
 }
 
 app.whenReady().then(createWindow);
@@ -160,7 +153,7 @@ ipcMain.on("sync", (event, ...args) => {
   const windows = BrowserWindow.getAllWindows();
   const otherWindows = windows.filter((w) => w.id !== event.sender.id);
   otherWindows.forEach((win) => {
-    win.webContents.send("sync", ...args);
+    win.webContents.send("sync-internal", ...args);
   });
   syncHistory = syncHistory.filter(([name]) => name !== args[0]);
   syncHistory.push(args);

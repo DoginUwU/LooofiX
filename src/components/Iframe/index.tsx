@@ -4,7 +4,7 @@ import React, { memo, useEffect } from 'react';
 
 const Iframe: React.FC = () => {
   const { currentMusic } = useMusic();
-  const { setVideo, setVideoState, video } = useYoutube();
+  const { handleVideo, handleVideoStateChange, video } = useYoutube();
 
   const syncYoutubeApi = () => {
     if (document.getElementById('youtube-api')) {
@@ -33,11 +33,11 @@ const Iframe: React.FC = () => {
   }
 
   const onPlayerReady = (event: YoutubeEvent) => {
-    setVideo(event.target);
+    handleVideo(event.target);
   }
 
   const onPlayerStateChange = (event: YoutubeEvent) => {
-    setVideoState(event.target.getPlayerState());
+    handleVideoStateChange(event.target.getPlayerState());
   }
 
   useEffect(() => {

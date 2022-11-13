@@ -8,9 +8,9 @@ import { useYoutube } from '@/contexts/YoutubeContext';
 
 const SettingsLayout: React.FC = () => {
   const { setCurrentMusicIndex } = useMusic();
-  const { setVideoState } = useYoutube();
+  const { handleVideoStateChange } = useYoutube();
   const [activeTab, setActiveTab] = useState<JSX.Element | null>(null);
-  new SyncWindows(["setCurrentMusicIndex", setCurrentMusicIndex], ["setVideoState", setVideoState]);
+  new SyncWindows(["setCurrentMusicIndex", setCurrentMusicIndex], ["handleVideoStateChange", handleVideoStateChange]);
 
   const handleTabChange = (tab: JSX.Element) => {
     setActiveTab(tab);

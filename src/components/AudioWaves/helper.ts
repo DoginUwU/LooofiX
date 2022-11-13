@@ -19,12 +19,12 @@ class AudioWavesHelper {
 
     this.createAnimations();
 
-    ipcRenderer.on("blur", () => {
-      this.blur();
-    });
-    ipcRenderer.on("focus", () => {
-      this.unblur();
-    });
+    // ipcRenderer.on("blur", () => {
+    //   this.blur();
+    // });
+    // ipcRenderer.on("focus", () => {
+    //   this.unblur();
+    // });
   }
 
   public createAnimations() {
