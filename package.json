@@ -16,10 +16,12 @@
   },
   "dependencies": {
     "@foobar404/wave": "^2.0.3",
+    "color": "^4.2.3",
     "moment": "^2.29.4"
   },
   "devDependencies": {
     "@iconify/react": "^4.0.0",
+    "@types/color": "^3.0.3",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.1.0",

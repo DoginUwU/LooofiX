@@ -2,7 +2,7 @@ import { useYoutube } from '@/contexts/YoutubeContext';
 import React, { useEffect } from 'react';
 
 const Iframe: React.FC = () => {
-  const { setVideo, setVideoElement, setVideoState } = useYoutube();
+  const { setVideo, setVideoState } = useYoutube();
 
   const syncYoutubeApi = () => {
     if (document.getElementById('youtube-api')) {
@@ -19,10 +19,10 @@ const Iframe: React.FC = () => {
     firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
 
     window.onYouTubeIframeAPIReady = () => {
-      const newPlayer = new YT.Player('player', {
+      new YT.Player('player', {
         height: '0',
         width: '0',
-        videoId: '5OeSk8-uwcU',
+        videoId: 't0cxI-hmxMo',
         events: {
           onReady: onPlayerReady,
           onStateChange: onPlayerStateChange,
@@ -33,12 +33,6 @@ const Iframe: React.FC = () => {
 
   const onPlayerReady = (event: YoutubeEvent) => {
     setVideo(event.target);
-    const iframe = event.target.getIframe();
-    const video = iframe.contentWindow?.document.querySelector('video');
-
-    if (!video) return;
-
-    setVideoElement(video);
   }
 
   const onPlayerStateChange = (event: YoutubeEvent) => {

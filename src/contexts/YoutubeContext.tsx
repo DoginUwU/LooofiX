@@ -12,8 +12,6 @@ const YoutubeVideoStates = {
 interface IYoutubeContext {
   video: YoutubeVideo | null;
   setVideo: (video: YoutubeVideo | null) => void;
-  videoElement: HTMLVideoElement | null;
-  setVideoElement: (videoElement: HTMLVideoElement | null) => void;
   videoState: number;
   setVideoState: (videoState: number) => void;
   elapsed: number;
@@ -23,7 +21,6 @@ const YoutubeContext = createContext<IYoutubeContext>({} as IYoutubeContext);
 
 const YoutubeProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
   const [video, setVideo] = useState<YoutubeVideo | null>(null);
-  const [videoElement, setVideoElement] = useState<HTMLVideoElement | null>(null);
   const [videoState, setVideoState] = useState<number>(YoutubeVideoStates.UNSTARTED);
   const [elapsed, setElapsed] = useState(0);
 
@@ -38,7 +35,7 @@ const YoutubeProvider: FunctionComponent<PropsWithChildren> = ({ children }) => 
   }, [video]);
 
   return (
-    <YoutubeContext.Provider value={{ video, elapsed, videoElement, videoState, setVideoState, setVideo, setVideoElement }}>
+    <YoutubeContext.Provider value={{ video, elapsed, videoState, setVideoState, setVideo }}>
       {children}
     </YoutubeContext.Provider>
   );
