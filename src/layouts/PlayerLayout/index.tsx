@@ -11,11 +11,13 @@ import { createNewWindow } from '@/utils/window';
 import { SyncWindows } from '@/utils/syncWindows';
 
 import style from './styles.module.scss';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const PlayerLayout: React.FC = () => {
   const useMusicCtx = useMusic();
   const useYoutubeCtx = useYoutube();
-  new SyncWindows(useYoutubeCtx, useMusicCtx);
+  const useThemeCtx = useTheme();
+  new SyncWindows(useYoutubeCtx, useMusicCtx, useThemeCtx);
 
   return (
     <main id="draggable">

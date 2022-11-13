@@ -9,16 +9,27 @@ import { formatElapsedTime, getPlayButtonIcon } from './helper';
 import AudioWaves from '../AudioWaves';
 
 import style from './styles.module.scss';
+import { useTheme } from '@/contexts/ThemeContext';
+import Color from 'color';
 
 const Player: React.FC = () => {
   const { video, elapsed, videoState, handlePlay } = useYoutube();
   const { handleNextMusic, handlePreviousMusic } = useMusic();
+  const { theme } = useTheme();
+  const gradientMarquee = Color(theme.bgPrimary).rgb();
 
   if (!video) return null;
 
   return <section className={style.container}>
     <div className={style.header}>
-      <Marquee className='title' gradientWidth={50}>{video.videoTitle || 'Buffering...'} </Marquee>
+      <Marquee
+        gradientColor={[gradientMarquee.red(), gradientMarquee.green(), gradientMarquee.blue()]}
+        gradientWidth={50}
+      >
+        <h1 className='title'>
+          {video.videoTitle || 'Buffering...'}&nbsp;|&nbsp;
+        </h1>
+      </Marquee>
       <h2>{formatElapsedTime(elapsed)} elapsed in LooofiX</h2>
     </div>
     <div className={style.controls}>

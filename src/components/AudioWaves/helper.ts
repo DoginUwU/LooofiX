@@ -1,12 +1,14 @@
+import { ITheme } from "@/@types/theme";
 import { Wave } from "@/utils/WaveJS";
-import { ipcRenderer } from "electron";
+import Color from "color";
 
 class AudioWavesHelper {
   public wave: Wave;
 
   constructor(
     private canvas?: HTMLCanvasElement,
-    private video?: HTMLVideoElement
+    private video?: HTMLVideoElement,
+    private theme?: ITheme
   ) {
     if (!this.canvas) {
       throw new Error("No canvas element provided");
@@ -30,8 +32,8 @@ class AudioWavesHelper {
   public createAnimations() {
     this.wave.addAnimation(
       new this.wave.animations.Wave({
-        fillColor: "#AAEDF2",
-        lineColor: "#94E1E7",
+        fillColor: this.theme?.secondary,
+        lineColor: Color(this.theme?.secondary).darken(0.2).hex(),
         rounded: true,
         count: 20,
         frequencyBand: "base",
@@ -39,8 +41,8 @@ class AudioWavesHelper {
     );
     this.wave.addAnimation(
       new this.wave.animations.Wave({
-        fillColor: "rgba(113, 184, 239, 0.5)",
-        lineColor: "#71B8EF",
+        fillColor: Color(this.theme?.primary).alpha(0.5).hsl().string(),
+        lineColor: Color(this.theme?.primary).darken(0.2).hex(),
         rounded: true,
         count: 20,
         frequencyBand: "lows",

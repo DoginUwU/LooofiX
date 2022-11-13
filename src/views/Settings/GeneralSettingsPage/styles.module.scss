@@ -38,14 +38,14 @@
     }
 
     & thead {
-      background-color: var(--gray-300);
+      background-color: var(--hover);
       color: var(--text-primary);
       font-weight: 600;
       font-size: 0.875rem;
       text-align: left;
 
       & tr {
-        border-bottom: 1px solid var(--gray-300);
+        border-bottom: 1px solid var(--hover)
       }
 
       & tr:last-of-type {
@@ -58,6 +58,7 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      color: var(--text-primary);
     }
     & td:nth-child(3) {
       width: 10px;
@@ -65,10 +66,10 @@
 
     & tbody {
       & tr {
-        border-bottom: 1px solid var(--gray-300);
+        border-bottom: 1px solid var(--hover);
 
         &:hover {
-          background-color: var(--gray-200);
+          background-color: var(--hover-secondary);
         }
       }
     }
@@ -77,16 +78,19 @@
 
 .activeMusic {
   color: var(--link);
+  & p {
+    color: var(--link)!important;
+  }
 }
 
 .musicDelete {
   background-color: var(--danger);
-  color: var(--white);
+  color: var(--bg-primary);
 }
 
 .findMoreButton {
   background-color: var(--link);
-  color: var(--white);
+  color: white;
   transition: all 0.2s ease-in-out;
   width: 100%;
   padding: 12px 0;

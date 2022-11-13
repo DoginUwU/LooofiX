@@ -8,12 +8,14 @@ import { useYoutube } from '@/contexts/YoutubeContext';
 import { SyncWindows } from '@/utils/syncWindows';
 
 import style from './styles.module.scss';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const SettingsLayout: React.FC = () => {
   const [activeTab, setActiveTab] = useState<JSX.Element | null>(null);
   const useMusicCtx = useMusic();
   const useYoutubeCtx = useYoutube();
-  new SyncWindows(useYoutubeCtx, useMusicCtx);
+  const useThemeCtx = useTheme();
+  new SyncWindows(useYoutubeCtx, useMusicCtx, useThemeCtx);
 
   const handleTabChange = (tab: JSX.Element) => {
     setActiveTab(tab);

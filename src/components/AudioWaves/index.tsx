@@ -5,9 +5,11 @@ import { useYoutube, YoutubeVideoStates } from '@/contexts/YoutubeContext';
 import { AudioWavesHelper } from './helper';
 
 import style from './styles.module.scss';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const AudioWaves: React.FC = () => {
   const { video, videoState } = useYoutube();
+  const { theme } = useTheme();
 
   useEffect(() => {
     if(videoState !== YoutubeVideoStates.PLAYING) return;
@@ -22,10 +24,10 @@ const AudioWaves: React.FC = () => {
     if (!videoElement) return;
 
     try {
-      new AudioWavesHelper(canvas, videoElement)
+      new AudioWavesHelper(canvas, videoElement, theme)
     } catch (error) {
       setTimeout(() => {
-        new AudioWavesHelper(canvas, videoElement)
+        new AudioWavesHelper(canvas, videoElement, theme)
       }, 5000)
     }
 
