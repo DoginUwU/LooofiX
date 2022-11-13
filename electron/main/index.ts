@@ -31,10 +31,10 @@ if (!app.requestSingleInstanceLock()) {
 }
 
 let win: BrowserWindow | null = null;
-const childWindows: BrowserWindow[] = [];
 const store = new Store({
   name: "looofix",
 });
+const syncHistory = [];
 // Here, you can also use other preload
 const preload = join(__dirname, "../preload/index.js");
 const url = process.env.VITE_DEV_SERVER_URL;
@@ -138,16 +138,21 @@ ipcMain.handle("open-win", (_, route) => {
     childWindow.loadURL(`${url}${route}`);
   }
 
-  childWindows.push(childWindow);
-
   return childWindow.id;
 });
 
-ipcMain.handle("close-win", (_, winId) => {
-  if (winId) {
-    const childWindow = childWindows.find((win) => win.id === winId);
-    childWindow?.close();
-  } else {
-    BrowserWindow.getFocusedWindow()?.close();
-  }
+ipcMain.handle("close-win", (_) => {
+  BrowserWindow.getFocusedWindow()?.close();
+});
+
+ipcMain.handle("get-sync-history", (_) => {
+  return syncHistory;
+});
+
+ipcMain.on("sync", (_, ...args) => {
+  const windows = BrowserWindow.getAllWindows();
+  windows.forEach((win) => {
+    win.webContents.send("sync", ...args);
+  });
+  syncHistory.push(args);
 });

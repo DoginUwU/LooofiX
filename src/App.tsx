@@ -8,7 +8,6 @@ import { router } from './routes'
 import { createDrag } from './utils/draggable'
 
 const App: React.FC = () => {
-
   useEffect(() => {
     createDrag();
     import('./styles/lightTheme');

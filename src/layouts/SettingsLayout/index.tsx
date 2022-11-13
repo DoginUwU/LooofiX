@@ -1,10 +1,14 @@
-import SettingsSidebar from '@/components/SettingsSidebar';
 import React, { memo, useState } from 'react';
+import SettingsSidebar from '@/components/SettingsSidebar';
+import { useMusic } from '@/contexts/MusicContext';
+import { SyncWindows } from '@/utils/syncWindows';
 
 import style from './styles.module.scss';
 
 const SettingsLayout: React.FC = () => {
+  const { setCurrentMusicIndex } = useMusic();
   const [activeTab, setActiveTab] = useState<JSX.Element | null>(null);
+  new SyncWindows([setCurrentMusicIndex, "setCurrentMusicIndex"]);
 
   const handleTabChange = (tab: JSX.Element) => {
     setActiveTab(tab);

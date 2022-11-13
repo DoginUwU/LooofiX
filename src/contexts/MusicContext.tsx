@@ -1,10 +1,13 @@
 import { IMusic } from "@/@types/music";
 import { DEFAULT_MUSIC_PLAYLIST } from "@/constants/music";
-import { createContext, FunctionComponent, PropsWithChildren, useContext, useState } from "react";
+import { SyncWindows } from "@/utils/syncWindows";
+import { createContext, FunctionComponent, PropsWithChildren, useContext, useEffect, useState } from "react";
 
 interface IMusicContext {
   playlist: IMusic[];
   currentMusic: IMusic | null;
+  currentMusicIndex: number;
+  setCurrentMusicIndex: (index: number) => void;
   handleNextMusic: () => void;
   handlePreviousMusic: () => void;
 }
@@ -34,12 +37,18 @@ const MusicProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
     setCurrentMusicIndex(currentMusicIndex - 1);
   }
 
+  useEffect(() => {
+    SyncWindows.send('setCurrentMusicIndex', currentMusicIndex);
+  }, [currentMusicIndex]);
+
   return (
     <MusicContext.Provider value={{
       currentMusic,
+      currentMusicIndex,
       playlist,
       handleNextMusic,
-      handlePreviousMusic
+      handlePreviousMusic,
+      setCurrentMusicIndex,
     }}>
       {children}
     </MusicContext.Provider>

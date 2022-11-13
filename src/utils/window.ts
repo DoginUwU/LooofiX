@@ -4,8 +4,8 @@ const createNewWindow = async () => {
   ipcRenderer.invoke("open-win", "settings");
 };
 
-const closeWindow = (winId?: number) => {
-  ipcRenderer.invoke("close-win", winId);
+const closeWindow = () => {
+  ipcRenderer.invoke("close-win");
 };
 
 export { createNewWindow, closeWindow };
