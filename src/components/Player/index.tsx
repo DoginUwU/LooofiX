@@ -11,6 +11,7 @@ import AudioWaves from '../AudioWaves';
 import style from './styles.module.scss';
 import { useTheme } from '@/contexts/ThemeContext';
 import Color from 'color';
+import { cx } from '@/utils/cx';
 
 const Player: React.FC = () => {
   const { video, elapsed, videoState, handlePlay } = useYoutube();
@@ -20,19 +21,19 @@ const Player: React.FC = () => {
 
   if (!video) return null;
 
-  return <section className={style.container}>
-    <div className={style.header}>
+  return <section className={cx(style.container, style.containerOnlyHover)}>
+    <div className={cx(style.header, { [style.headerOnlyHover]: true })}>
       <Marquee
         gradientColor={[gradientMarquee.red(), gradientMarquee.green(), gradientMarquee.blue()]}
         gradientWidth={50}
       >
         <h1 className='title'>
-          {video.videoTitle || 'Buffering...'}&nbsp;|&nbsp;
+          {video.videoTitle || 'Buffering...'}&nbsp;
         </h1>
       </Marquee>
       <h2>{formatElapsedTime(elapsed)} elapsed in LooofiX</h2>
     </div>
-    <div className={style.controls}>
+    <div className={cx(style.controls, { [style.controlsOnlyHover]: true })}>
       <button onClick={() => handlePreviousMusic()}>
         <Icon icon="mdi:skip-previous" fontSize={32} />
       </button>

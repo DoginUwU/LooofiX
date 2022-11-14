@@ -11,6 +11,30 @@
   padding: 0 20px;
 }
 
+.containerOnlyHover {
+    .headerOnlyHover {
+      opacity: 0;
+      margin-top: -40px;
+      transition: all 0.2s;
+    }
+    .controlsOnlyHover {
+      opacity: 0;
+      margin-bottom: -40px;
+      transition: all 0.2s;
+    }
+
+    &:hover {
+      .headerOnlyHover {
+        margin-top: 0;
+        opacity: 1;
+      }
+      .controlsOnlyHover {
+        margin-bottom: 0px;
+        opacity: 1;
+      }
+    }
+  }
+
 .header {
   display: flex;
   flex-direction: column;
@@ -58,4 +82,8 @@
       transform: scale(1.1);
     }
   }
+}
+
+.hide {
+  display: none;
 }
