@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useYoutube, YoutubeVideoStates } from '@/contexts/YoutubeContext';
 
@@ -8,6 +8,7 @@ import style from './styles.module.scss';
 import { useTheme } from '@/contexts/ThemeContext';
 
 const AudioWaves: React.FC = () => {
+  const [audioWavesHelper, setAudioWavesHelper] = useState<AudioWavesHelper>();
   const { video, videoState } = useYoutube();
   const { theme } = useTheme();
 
@@ -24,14 +25,18 @@ const AudioWaves: React.FC = () => {
     if (!videoElement) return;
 
     try {
-      new AudioWavesHelper(canvas, videoElement, theme)
+      setAudioWavesHelper(new AudioWavesHelper(canvas, videoElement, theme))
     } catch (error) {
       setTimeout(() => {
-        new AudioWavesHelper(canvas, videoElement, theme)
+        setAudioWavesHelper(new AudioWavesHelper(canvas, videoElement, theme))
       }, 5000)
     }
 
   }, [videoState]);
+
+  useEffect(() => {
+    audioWavesHelper?.setTheme(theme);
+  }, [theme]);
 
   return <canvas id="wave-canvas" className={style.waves} />;
 }

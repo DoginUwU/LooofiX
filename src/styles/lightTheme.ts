@@ -1,5 +1,4 @@
 import { ITheme } from "@/@types/theme";
-import "./light.theme.scss";
 
 const THEME: ITheme = {
   primary: "#00b4d8",
@@ -8,9 +7,4 @@ const THEME: ITheme = {
   bgSecondary: "#000",
 };
 
-const darkTheme = () => {
-  import("./light.theme.scss");
-  return THEME;
-};
-
-export default darkTheme;
+export default THEME;

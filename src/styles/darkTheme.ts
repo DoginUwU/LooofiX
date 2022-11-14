@@ -7,9 +7,4 @@ const THEME: ITheme = {
   bgSecondary: "#000",
 };
 
-const darkTheme = () => {
-  import("./dark.theme.scss");
-  return THEME;
-};
-
-export default darkTheme;
+export default THEME;

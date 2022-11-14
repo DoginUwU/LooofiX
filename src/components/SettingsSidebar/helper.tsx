@@ -1,4 +1,5 @@
 import GeneralSettingsPage from "@/views/Settings/GeneralSettingsPage";
+import AppearanceSettingsPage from "@/views/Settings/AppearanceSettingsPage";
 
 const ITEMS = [
   {
@@ -11,7 +12,7 @@ const ITEMS = [
     id: "appearance",
     title: "Appearance",
     icon: "mdi:palette",
-    component: <GeneralSettingsPage />,
+    component: <AppearanceSettingsPage />,
   },
   {
     id: "behaviours",

@@ -6,27 +6,34 @@ import lightTheme from "@/styles/lightTheme";
 import { ITheme } from "@/@types/theme";
 import { SyncWindows } from "@/utils/syncWindows";
 
-type AvailableThemes = 'light' | 'dark';
+export type AvailableThemes = 'light' | 'dark';
 
 interface IThemeContext {
   theme: ITheme;
+  themeString: AvailableThemes;
   handleTheme: (theme: AvailableThemes) => void;
 }
 
 const ThemeContext = createContext<IThemeContext>({} as IThemeContext);
 
 const ThemeProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
-  const [themeString, setThemeString] = useState<AvailableThemes>("dark");
-  const theme = themeString === "light" ? lightTheme() : darkTheme();
+  const [themeString, setThemeString] = useState<AvailableThemes>("light");
+  const theme = themeString === "light" ? lightTheme : darkTheme;
 
   const handleTheme = (theme: AvailableThemes, __syncCall?: boolean) => {
     setThemeString(theme);
+    const app = document.getElementById("root");
+    if(theme === "light") {
+      app?.classList.remove("theme-dark");
+    } else {
+      app?.classList.add("theme-dark");
+    }
 
     if (!__syncCall) SyncWindows.send("handleTheme", theme);
   }
 
   return (
-      <ThemeContext.Provider value={{ theme, handleTheme }}>
+      <ThemeContext.Provider value={{ theme, themeString, handleTheme }}>
           {children}
       </ThemeContext.Provider>
   );

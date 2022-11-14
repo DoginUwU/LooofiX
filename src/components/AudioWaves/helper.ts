@@ -64,6 +64,12 @@ class AudioWavesHelper {
     this.canvas.style.display = "block";
     this.createAnimations();
   }
+
+  public setTheme(theme: ITheme) {
+    this.theme = theme;
+    this.wave.clearAnimations();
+    this.createAnimations();
+  }
 }
 
 export { AudioWavesHelper };
