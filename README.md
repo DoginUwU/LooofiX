@@ -17,7 +17,6 @@
 </samp>
 
 <p align="center">
-  <img src="https://img.shields.io/appveyor/build/DoginUwU/LooofiX-22272E?style=flat-square" />
   <img src="https://img.shields.io/badge/Music-22272E?logo=youtube&style=flat-square" />
   <img src="https://img.shields.io/badge/Typescript-22272E?logo=typescript&style=flat-square" />
   <img src="https://img.shields.io/badge/React-22272E?logo=react&style=flat-square" />
