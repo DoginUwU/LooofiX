@@ -48,6 +48,8 @@ Download and use the Looofix on [Releases Page](https://github.com/DoginUwU/Looo
 
 ## Roadmap
 
+- Add app on system tray
+
 - Deep performance optimization
 
 - Add pomodoro integration
