@@ -72,6 +72,10 @@
       text-align: center;
     }
 
+    a {
+      text-decoration: none;
+    }
+
     button {
       padding: 4px 8px;
       border-radius: 4px;
@@ -80,6 +84,10 @@
       font-weight: 600;
       color: var(--text-primary);
       text-align: center;
+
+      &:hover {
+        background: var(--link-hover);
+      }
     }
   }
 }
