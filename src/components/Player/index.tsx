@@ -20,16 +20,12 @@ const Player: React.FC = () => {
   const { handleNextMusic, handlePreviousMusic } = useMusic();
   const { settings } = useSettings();
   const { theme } = useTheme();
-  const gradientMarquee = Color(theme.bgPrimary).rgb();
 
   if (!video) return null;
 
   return <section className={cx(style.container, style.containerOnlyHover)}>
     <div className={cx(style.header, { [style.headerOnlyHover]: settings.appearance.player.onlyShowTitleOnHover })}>
-      <Marquee
-        gradientColor={[gradientMarquee.red(), gradientMarquee.green(), gradientMarquee.blue()]}
-        gradientWidth={50}
-      >
+      <Marquee gradient={false}>
         <h1 className='title'>
           {video.videoTitle || 'Buffering...'}&nbsp;
         </h1>
