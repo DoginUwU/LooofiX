@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
 
-import { MusicProvider } from './contexts/MusicContext';
 import { ThemeProvider } from './contexts/ThemeContext';
+import { SettingsProvider } from './contexts/SettingsContext';
+import { MusicProvider } from './contexts/MusicContext';
 import { YoutubeProvider } from './contexts/YoutubeContext';
 
 import { createDrag } from './utils/draggable';
@@ -16,13 +17,15 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <ThemeProvider>
-      <MusicProvider>
-        <YoutubeProvider>
-          <RouterProvider router={router} />
-        </YoutubeProvider>
-      </MusicProvider>
-    </ThemeProvider>
+    <SettingsProvider>
+      <ThemeProvider>
+        <MusicProvider>
+          <YoutubeProvider>
+            <RouterProvider router={router} />
+          </YoutubeProvider>
+        </MusicProvider>
+      </ThemeProvider>
+    </SettingsProvider>
   )
 }
 

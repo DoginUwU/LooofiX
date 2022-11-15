@@ -5,4 +5,6 @@ interface ITheme {
   bgSecondary: string;
 }
 
-export type { ITheme };
+type AvailableThemes = "light" | "dark";
+
+export type { ITheme, AvailableThemes };

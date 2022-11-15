@@ -1,23 +1,23 @@
-import { createContext, FunctionComponent, PropsWithChildren, useContext, useState } from "react";
+import { createContext, FunctionComponent, PropsWithChildren, useContext, useEffect, useState } from "react";
 
 import darkTheme from "@/styles/darkTheme";
 import lightTheme from "@/styles/lightTheme";
 
-import { ITheme } from "@/@types/theme";
+import { AvailableThemes, ITheme } from "@/@types/theme";
 import { SyncWindows } from "@/utils/syncWindows";
+import { useSettings } from "./SettingsContext";
 
-export type AvailableThemes = 'light' | 'dark';
 
 interface IThemeContext {
   theme: ITheme;
   themeString: AvailableThemes;
-  handleTheme: (theme: AvailableThemes) => void;
 }
 
 const ThemeContext = createContext<IThemeContext>({} as IThemeContext);
 
 const ThemeProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
-  const [themeString, setThemeString] = useState<AvailableThemes>("light");
+  const { settings } = useSettings();
+  const [themeString, setThemeString] = useState<AvailableThemes>(settings.appearance.theme);
   const theme = themeString === "light" ? lightTheme : darkTheme;
 
   const handleTheme = (theme: AvailableThemes, __syncCall?: boolean) => {
@@ -32,8 +32,12 @@ const ThemeProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
     if (!__syncCall) SyncWindows.send("handleTheme", theme);
   }
 
+  useEffect(() => {
+    handleTheme(settings.appearance.theme);
+  }, [settings.appearance.theme]);
+
   return (
-      <ThemeContext.Provider value={{ theme, themeString, handleTheme }}>
+      <ThemeContext.Provider value={{ theme, themeString }}>
           {children}
       </ThemeContext.Provider>
   );
@@ -43,7 +47,7 @@ const useTheme = () => {
   const context = useContext(ThemeContext);
 
   if (!context) {
-    throw new Error('useYoutube must be used within a YoutubeProvider');
+    throw new Error('useTheme must be used within a YoutubeProvider');
   }
 
   return context;

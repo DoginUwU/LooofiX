@@ -69,7 +69,7 @@ const useMusic = () => {
   const context = useContext(MusicContext);
 
   if (!context) {
-    throw new Error('useYoutube must be used within a YoutubeProvider');
+    throw new Error('useMusic must be used within a YoutubeProvider');
   }
 
   return context;

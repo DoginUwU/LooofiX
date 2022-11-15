@@ -3,14 +3,14 @@ import * as RadixTooltip from '@radix-ui/react-tooltip';
 
 import style from './styles.module.scss';
 
-interface TooltipProps {
+interface TooltipProps extends RadixTooltip.TooltipProps {
   content: string;
   children: React.ReactNode;
 }
 
-const Tooltip: React.FC<TooltipProps> = ({ children, content }) => {
+const Tooltip: React.FC<TooltipProps> = ({ children, content, ...args }) => {
   return (
-    <RadixTooltip.Root delayDuration={500}>
+    <RadixTooltip.Root delayDuration={500} {...args}>
       <RadixTooltip.Trigger  asChild>
         {children}
       </RadixTooltip.Trigger>

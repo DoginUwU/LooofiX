@@ -158,3 +158,11 @@ ipcMain.on("sync", (event, ...args) => {
   syncHistory = syncHistory.filter(([name]) => name !== args[0]);
   syncHistory.push(args);
 });
+
+ipcMain.handle("save-settings", (_, settings) => {
+  if (!settings) return;
+  store.set("settings", settings);
+});
+ipcMain.handle("get-settings", (_) => {
+  return store.get("settings");
+});

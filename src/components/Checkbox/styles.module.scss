@@ -1,0 +1,29 @@
+.root {
+  background-color: (--text-primary);
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  transition: background-color 0.2s ease-in-out;
+
+  &[data-state="checked"] {
+    background-color: var(--link);
+  }
+}
+
+.indicator {
+  color: white;
+  line-height: 0;
+}
+
+.label {
+  color: var(--text-primary);
+  padding-left: 15px;
+  font-size: 15px;
+  line-height: 1;
+  user-select: none;
+  font-weight: 300;
+}

@@ -12,12 +12,15 @@ import { SyncWindows } from '@/utils/syncWindows';
 
 import style from './styles.module.scss';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useSettings } from '@/contexts/SettingsContext';
 
 const PlayerLayout: React.FC = () => {
   const useMusicCtx = useMusic();
   const useYoutubeCtx = useYoutube();
   const useThemeCtx = useTheme();
-  new SyncWindows(useYoutubeCtx, useMusicCtx, useThemeCtx);
+  const useSettingsCtx = useSettings();
+
+  new SyncWindows(useYoutubeCtx, useMusicCtx, useThemeCtx, useSettingsCtx);
 
   return (
     <main id="draggable">
