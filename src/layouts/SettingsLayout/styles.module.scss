@@ -14,24 +14,43 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 30px;
   border-radius: 20px 20px 0 0;
   border-bottom: 1px solid var(--hover);
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: nowrap;
   user-select: none;
   -webkit-app-region: drag;
+}
+.topBarTitle {
+  flex: 1;
 
-  & h1 {
+  h1 {
     margin: 0;
     padding: 0;
     font-size: 0.75rem;
     font-weight: 500;
     color: var(--text-primary);
     text-align: center;
-    line-height: 50px;
     -webkit-app-region: drag;
+  }
+}
+.topBarActions {
+  padding-right: 12px;
+  button {
+    padding: 0;
+    width: 12px;
+    height: 12px;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--danger);
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 }
 

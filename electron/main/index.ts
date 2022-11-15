@@ -31,6 +31,7 @@ if (!app.requestSingleInstanceLock()) {
 }
 
 let win: BrowserWindow | null = null;
+let windowsMap = new Map<string, number>();
 const store = new Store({
   name: "looofix",
 });
@@ -132,6 +133,11 @@ ipcMain.handle("move-win", (_, xLoc, yLoc) => {
 
 // new window example arg: new windows url
 ipcMain.handle("open-win", (_, route) => {
+  if (windowsMap.has(route)) {
+    BrowserWindow.fromId(windowsMap.get(route)).focus();
+    return null;
+  }
+
   const childWindow = new BrowserWindow({
     frame: false,
     roundedCorners: true,
@@ -151,11 +157,21 @@ ipcMain.handle("open-win", (_, route) => {
     childWindow.loadURL(`${url}${route}`);
   }
 
+  windowsMap.set(route, childWindow.id);
+
   return childWindow.id;
 });
 
 ipcMain.handle("close-win", (_) => {
-  BrowserWindow.getFocusedWindow()?.close();
+  const currentWindow = BrowserWindow.getFocusedWindow();
+
+  windowsMap.forEach((id, route) => {
+    if (id === currentWindow.id) {
+      windowsMap.delete(route);
+    }
+  });
+
+  currentWindow.close();
 });
 
 ipcMain.handle("get-sync-history", (_) => {

@@ -10,6 +10,7 @@ import { SyncWindows } from '@/utils/syncWindows';
 import style from './styles.module.scss';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useSettings } from '@/contexts/SettingsContext';
+import { closeWindow } from '@/utils/window';
 
 const SettingsLayout: React.FC = () => {
   const [activeTab, setActiveTab] = useState<JSX.Element | null>(null);
@@ -27,7 +28,12 @@ const SettingsLayout: React.FC = () => {
   return (
     <main className={style.container}>
       <div className={style.topBar}>
-        <h1>Settings</h1>
+        <div className={style.topBarTitle}>
+          <h1>Settings</h1>
+        </div>
+        <div className={style.topBarActions}>
+          <button className="close" onClick={closeWindow} />
+        </div>
       </div>
       <SettingsSidebar onTabChange={handleTabChange} />
       <div className={style.content}>
