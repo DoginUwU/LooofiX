@@ -68,5 +68,5 @@ Contributions are always welcome! You can simple clone this repository and user 
 ## Credits
 - All open source packages stay in `package.json` file
 - [Wave.js](https://github.com/foobar404/Wave.js)
-
+- [Lofi Girl](https://www.youtube.com/@LofiGirl) for 24/7 livestreams
 
