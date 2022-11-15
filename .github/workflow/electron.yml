@@ -18,7 +18,7 @@ jobs:
       - name: Update version
         uses: dmikey/package-json-version@0.0.2
         with:
-          version: ${{ github.ref }}
+          version: ${{ github.ref_name }}
       - name: Install dependencies
         run: yarn install
       - name: Build on Linux
