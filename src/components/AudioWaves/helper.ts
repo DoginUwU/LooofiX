@@ -1,14 +1,18 @@
+import { ISettings } from "@/@types/settings";
 import { ITheme } from "@/@types/theme";
 import { Wave } from "@/utils/WaveJS";
 import Color from "color";
+import { ipcRenderer } from "electron";
 
 class AudioWavesHelper {
   public wave: Wave;
+  public isBlurred: boolean = false;
 
   constructor(
     private canvas?: HTMLCanvasElement,
     private video?: HTMLVideoElement,
-    private theme?: ITheme
+    private theme?: ITheme,
+    private settings?: ISettings
   ) {
     if (!this.canvas) {
       throw new Error("No canvas element provided");
@@ -21,12 +25,18 @@ class AudioWavesHelper {
 
     this.createAnimations();
 
-    // ipcRenderer.on("blur", () => {
-    //   this.blur();
-    // });
-    // ipcRenderer.on("focus", () => {
-    //   this.unblur();
-    // });
+    ipcRenderer.on("blur", () => {
+      this.blur();
+    });
+    ipcRenderer.on("focus", () => {
+      this.unblur();
+    });
+    ipcRenderer.on("hide", () => {
+      this.blur();
+    });
+    ipcRenderer.on("show", () => {
+      this.unblur();
+    });
   }
 
   public createAnimations() {
@@ -51,15 +61,20 @@ class AudioWavesHelper {
   }
 
   public blur() {
-    this.wave.clearAnimations();
-
+    if (!this.settings) return;
+    const { disableWavesOnBlur, disableWavesOnMinimize } =
+      this.settings.behaviours;
+    if (!disableWavesOnBlur || !disableWavesOnMinimize) return;
     if (!this.canvas) return;
 
+    this.wave.clearAnimations();
+
     this.canvas.style.display = "none";
+    this.isBlurred = true;
   }
 
   public unblur() {
-    if (!this.canvas) return;
+    if (!this.canvas || !this.isBlurred) return;
 
     this.canvas.style.display = "block";
     this.createAnimations();
@@ -69,6 +84,16 @@ class AudioWavesHelper {
     this.theme = theme;
     this.wave.clearAnimations();
     this.createAnimations();
+  }
+
+  public setSettings(settings: ISettings) {
+    this.settings = settings;
+
+    if (this.settings.behaviours.disableWavesOnBlur) {
+      this.blur();
+    } else {
+      this.unblur();
+    }
   }
 }
 

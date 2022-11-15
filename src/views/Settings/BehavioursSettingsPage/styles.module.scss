@@ -10,6 +10,10 @@
     font-weight: 600;
     color: var(--text-primary);
     text-align: center;
+
+    &:not(:first-child) {
+      margin-top: 48px;
+    }
   }
 }
 

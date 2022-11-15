@@ -30,6 +30,7 @@ export class Wave {
   private _audioAnalyser!: AnalyserNode;
   private _canvasElement: HTMLCanvasElement;
   private _canvasContext: CanvasRenderingContext2D;
+  private _checkUpdateTimeout: any;
 
   constructor(
     videoElement: HTMLVideoElement,
@@ -59,6 +60,11 @@ export class Wave {
     let audioBufferData = new Uint8Array(this._audioAnalyser.frequencyBinCount);
 
     let tick = () => {
+      if (!this._activeAnimations.length) {
+        this._checkUpdateTimeout = setTimeout(tick, 1000 / 60);
+        return;
+      }
+      if (this._checkUpdateTimeout) clearTimeout(this._checkUpdateTimeout);
       this._audioAnalyser.getByteFrequencyData(audioBufferData);
       this._canvasContext.clearRect(
         0,

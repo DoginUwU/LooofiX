@@ -10,6 +10,8 @@ interface IAppearanceSettings {
 
 interface IBehavioursSettings {
   alwaysOnTop: boolean;
+  disableWavesOnBlur: boolean;
+  disableWavesOnMinimize: boolean;
 }
 
 interface ISettings {

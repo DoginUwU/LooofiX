@@ -28,6 +28,19 @@ const BehavioursSettingsPage: React.FC = () => {
           onCheckedChange={(value) => handleSettingsChange('alwaysOnTop', value)}
         />
       </div>
+      <h1>Optimizations</h1>
+      <div className={style.checks}>
+        <Checkbox
+          label='Remove waves when blur'
+          checked={behaviours.disableWavesOnBlur}
+          onCheckedChange={(value) => handleSettingsChange('disableWavesOnBlur', value)}
+        />
+        <Checkbox
+          label='Remove waves when minimize'
+          checked={behaviours.disableWavesOnMinimize}
+          onCheckedChange={(value) => handleSettingsChange('disableWavesOnMinimize', value)}
+        />
+      </div>
     </section>
   )
 }

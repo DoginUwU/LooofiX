@@ -71,6 +71,19 @@ async function createWindow() {
     win?.webContents.send("main-process-message", new Date().toLocaleString());
   });
 
+  win.on("blur", () => {
+    win?.webContents.send("blur");
+  });
+  win.on("hide", () => {
+    win?.webContents.send("hide");
+  });
+  win.on("show", () => {
+    win?.webContents.send("show");
+  });
+  win.on("focus", () => {
+    win?.webContents.send("focus");
+  });
+
   // Make all links open with the browser, not with the application
   win.webContents.setWindowOpenHandler(({ url }) => {
     if (url.startsWith("https:")) shell.openExternal(url);

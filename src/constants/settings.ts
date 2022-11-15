@@ -10,6 +10,8 @@ const DEFAULT_SETTINGS: ISettings = {
   },
   behaviours: {
     alwaysOnTop: false,
+    disableWavesOnBlur: false,
+    disableWavesOnMinimize: true,
   },
 };
 
