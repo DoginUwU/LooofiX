@@ -8,8 +8,13 @@ interface IAppearanceSettings {
   };
 }
 
+interface IBehavioursSettings {
+  alwaysOnTop: boolean;
+}
+
 interface ISettings {
   appearance: IAppearanceSettings;
+  behaviours: IBehavioursSettings;
 }
 
 export type { ISettings, IAppearanceSettings };

@@ -1,12 +1,10 @@
 import React, { memo } from 'react';
 import { Icon } from '@iconify/react';
 import Marquee from "react-fast-marquee";
-import Color from 'color';
 
 import { useSettings } from '@/contexts/SettingsContext';
 import { useYoutube } from '@/contexts/YoutubeContext';
 import { useMusic } from '@/contexts/MusicContext';
-import { useTheme } from '@/contexts/ThemeContext';
 
 import { cx } from '@/utils/cx';
 
@@ -19,7 +17,6 @@ const Player: React.FC = () => {
   const { video, elapsed, videoState, handlePlay } = useYoutube();
   const { handleNextMusic, handlePreviousMusic } = useMusic();
   const { settings } = useSettings();
-  const { theme } = useTheme();
 
   if (!video) return null;
 

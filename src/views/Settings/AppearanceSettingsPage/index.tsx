@@ -1,11 +1,15 @@
 import React from 'react';
 import { AvailableThemes } from '@/@types/theme';
-import Checkbox from '@/components/Checkbox';
+
 import { useSettings } from '@/contexts/SettingsContext';
+
+import Checkbox from '@/components/Checkbox';
+
 import { cx } from '@/utils/cx';
 
-import style from './styles.module.scss';
 import { dotNotationToObject } from '@/helpers/dotNotation';
+
+import style from './styles.module.scss';
 
 const AppearanceSettingsPage: React.FC = () => {
   const { settings, settings: { appearance }, handleSetSettings } = useSettings();

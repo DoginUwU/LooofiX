@@ -1,5 +1,6 @@
 import GeneralSettingsPage from "@/views/Settings/GeneralSettingsPage";
 import AppearanceSettingsPage from "@/views/Settings/AppearanceSettingsPage";
+import BehavioursSettingsPage from "@/views/Settings/BehavioursSettingsPage";
 
 const ITEMS = [
   {
@@ -18,7 +19,7 @@ const ITEMS = [
     id: "behaviours",
     title: "Behaviours",
     icon: "mdi:gesture-tap",
-    component: <GeneralSettingsPage />,
+    component: <BehavioursSettingsPage />,
   },
   {
     id: "about",

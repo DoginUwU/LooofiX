@@ -166,3 +166,7 @@ ipcMain.handle("save-settings", (_, settings) => {
 ipcMain.handle("get-settings", (_) => {
   return store.get("settings");
 });
+
+ipcMain.handle("set-always-on-top", (_, alwaysOnTop) => {
+  win.setAlwaysOnTop(alwaysOnTop);
+});

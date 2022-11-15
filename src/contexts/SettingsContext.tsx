@@ -4,6 +4,8 @@ import { ISettings } from "@/@types/settings";
 import { getSettings, setSettings as setUtilsSettings } from "@/utils/settings";
 import { DEFAULT_SETTINGS } from "@/constants/settings";
 import { SyncWindows } from "@/utils/syncWindows";
+import { setAlwaysOnTop } from "@/utils/behaviours";
+import { deepSameKeys } from "@/helpers/deepChecker";
 
 interface ISettingsContext {
   settings: ISettings;
@@ -19,11 +21,9 @@ const SettingsProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const initializeSettings = async () => {
     let settings = await getSettings();
 
-    if (!settings) {
+    if (!settings || !deepSameKeys(settings, DEFAULT_SETTINGS)) {
       settings = DEFAULT_SETTINGS;
     }
-
-    console.log(settings)
 
     setSettings(settings);
   }
@@ -38,6 +38,10 @@ const SettingsProvider: React.FC<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
     initializeSettings();
   }, []);
+
+  useEffect(() => {
+    setAlwaysOnTop(settings.behaviours.alwaysOnTop);
+  }, [settings.behaviours.alwaysOnTop]);
 
   return (
     <SettingsContext.Provider value={{ settings, initializeSettings, handleSetSettings }}>

@@ -8,6 +8,9 @@ const DEFAULT_SETTINGS: ISettings = {
       onlyShowTitleOnHover: false,
     },
   },
+  behaviours: {
+    alwaysOnTop: false,
+  },
 };
 
 export { DEFAULT_SETTINGS };
