@@ -3,7 +3,7 @@ name: build
 on:
   push:
     tags:
-      - "*"
+      - "*.*.*"
 
 jobs:
   build_linux:
@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 19
       - name: Update version
-        uses: dmikey/package-json-version@0.0.2
+        uses: dmikey/package-json-version@v0.0.2
         with:
           version: ${{ github.ref_name }}
       - name: Install dependencies
