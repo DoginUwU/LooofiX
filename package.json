@@ -9,7 +9,7 @@
   "main": "dist-electron/electron/main/index.js",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && electron-builder"
+    "build": "tsc && vite build && electron-builder --publish=never"
   },
   "engines": {
     "node": "^14.18.0 || >=16.0.0"
