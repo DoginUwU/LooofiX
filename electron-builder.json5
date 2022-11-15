@@ -17,7 +17,7 @@
         arch: ["x64"],
       },
     ],
-    artifactName: "${productName}-Windows-${version}-Setup.${ext}",
+    artifactName: "${productName}-Setup.${ext}",
   },
   nsis: {
     oneClick: false,
