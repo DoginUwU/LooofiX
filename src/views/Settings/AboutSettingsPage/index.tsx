@@ -7,7 +7,7 @@ const AboutSettingsPage: React.FC = () => {
   return (
     <div className={style.container}>
       <div className={style.me}>
-        <img src="https://cdn.discordapp.com/attachments/768646098964709446/1041351387545616395/7c1909172812a3bdf3a80e61137d3000.jpg" alt="Author" />
+        <img src="pictures/me.jpg" alt="Author" />
         <h1>Luiz ♡#8950</h1>
       </div>
       <div className={style.info}>
@@ -20,7 +20,7 @@ const AboutSettingsPage: React.FC = () => {
           <p>MIT</p>
         </div>
         <div>
-          <h1>Github</h1>
+          <h1>Source</h1>
           <a href="https://github.com/DoginUwU/LooofiX">
             <Button>Open</Button>
           </a>

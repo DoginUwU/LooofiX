@@ -1,7 +1,7 @@
 import { ipcRenderer } from "electron";
 
 const createNewWindow = async () => {
-  ipcRenderer.invoke("open-win", "settings");
+  ipcRenderer.invoke("open-win", "/settings");
 };
 
 const closeWindow = () => {

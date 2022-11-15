@@ -35,7 +35,7 @@ const AppearanceSettingsPage: React.FC = () => {
             className={cx(style.itemTheme, { [style.itemThemeActive]: appearance.theme === theme })}
             onClick={() => handleSettingsChange('theme', theme)}
           >
-            <img src={`/assets/${theme}-theme.svg`} alt={`${theme} Theme`} />
+            <img src={`pictures/${theme}-theme.svg`} alt={`${theme} Theme`} />
           </div>
         ))}
       </div>

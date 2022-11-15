@@ -1,8 +1,8 @@
 {
   "name": "looofix",
   "productName": "LooofiX",
-  "private": true,
-  "version": "2.1.0",
+  "private": false,
+  "version": "1.0.0",
   "description": "A simple desktop lofi player",
   "author": "Luiz <doginuwu@gmail.com>",
   "license": "MIT",

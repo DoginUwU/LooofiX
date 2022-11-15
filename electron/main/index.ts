@@ -154,7 +154,7 @@ ipcMain.handle("open-win", (_, route) => {
   if (app.isPackaged) {
     childWindow.loadFile(indexHtml, { hash: route });
   } else {
-    childWindow.loadURL(`${url}${route}`);
+    childWindow.loadURL(`${url}#${route}`);
   }
 
   windowsMap.set(route, childWindow.id);

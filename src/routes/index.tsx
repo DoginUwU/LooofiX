@@ -1,17 +1,17 @@
-import { createBrowserRouter } from "react-router-dom"
+import { createHashRouter } from "react-router-dom"
   ;
 import PlayerLayout from "@/layouts/PlayerLayout";
 import SettingsLayout from "@/layouts/SettingsLayout";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <PlayerLayout />,
   },
   {
-    path: "settings",
+    path: "/settings",
     element: <SettingsLayout />,
   },
-]);
+], { basename: '/' });
 
 export { router };
