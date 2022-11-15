@@ -32,6 +32,6 @@
   linux: {
     icon: "electron/resources/iconset",
     target: ["AppImage"],
-    artifactName: "${productName}-Linux-${version}.${ext}",
+    artifactName: "${productName}.${ext}",
   },
 }
