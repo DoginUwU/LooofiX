@@ -28,12 +28,12 @@ export class Shapes {
     pointY: number,
     degrees: number
   ) {
-    let angle = this.toRadians(degrees);
-    let x =
+    const angle = this.toRadians(degrees);
+    const x =
       Math.cos(angle) * (pointX - originX) -
       Math.sin(angle) * (pointY - originY) +
       originX;
-    let y =
+    const y =
       Math.sin(angle) * (pointX - originX) +
       Math.cos(angle) * (pointY - originY) +
       originY;
@@ -46,9 +46,9 @@ export class Shapes {
     let endX = this._canvasContext.canvas.width;
     let endY = this._canvasContext.canvas.height / 2;
     if (rotate) {
-      let originX = this._canvasContext.canvas.width / 2;
-      let originY = this._canvasContext.canvas.height / 2;
-      let rotatedStart = this._rotatePoint(
+      const originX = this._canvasContext.canvas.width / 2;
+      const originY = this._canvasContext.canvas.height / 2;
+      const rotatedStart = this._rotatePoint(
         originX,
         originY,
         startX,
@@ -57,12 +57,12 @@ export class Shapes {
       );
       startX = rotatedStart.x;
       startY = rotatedStart.y;
-      let rotatedEnd = this._rotatePoint(originX, originY, endX, endY, rotate);
+      const rotatedEnd = this._rotatePoint(originX, originY, endX, endY, rotate);
       endX = rotatedEnd.x;
       endY = rotatedEnd.y;
     }
 
-    let gradient = this._canvasContext.createLinearGradient(
+    const gradient = this._canvasContext.createLinearGradient(
       startX,
       startY,
       endX,
@@ -75,7 +75,7 @@ export class Shapes {
   }
 
   private async _makeImage(srcUrl: string): Promise<CanvasPattern> {
-    let img = new Image();
+    const img = new Image();
     img.src = srcUrl;
 
     return new Promise((res, rej) => {
@@ -178,10 +178,10 @@ export class Shapes {
     this._canvasContext.moveTo(points[0].x, points[0].y);
 
     for (let i = 0; i < points.length; i++) {
-      let point = points[i];
-      let nextPoint = points[i + 1] ?? point;
-      let xc = (point.x + nextPoint.x) / 2;
-      let yc = (point.y + nextPoint.y) / 2;
+      const point = points[i];
+      const nextPoint = points[i + 1] ?? point;
+      const xc = (point.x + nextPoint.x) / 2;
+      const yc = (point.y + nextPoint.y) / 2;
 
       if (options?.rounded)
         this._canvasContext.quadraticCurveTo(points[i].x, points[i].y, xc, yc);

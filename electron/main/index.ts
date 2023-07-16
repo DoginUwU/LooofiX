@@ -31,7 +31,7 @@ if (!app.requestSingleInstanceLock()) {
 }
 
 let win: BrowserWindow | null = null;
-let windowsMap = new Map<string, number>();
+const windowsMap = new Map<string, number>();
 const store = new Store({
   name: "looofix",
 });

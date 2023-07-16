@@ -6,14 +6,14 @@ export class AudioData {
   }
 
   public setFrequencyBand(band: string) {
-    let baseLength = Math.floor(this.data.length * 0.0625);
-    let lowsLength = Math.floor(this.data.length * 0.0625);
-    let midsLength = Math.floor(this.data.length * 0.375);
+    const baseLength = Math.floor(this.data.length * 0.0625);
+    const lowsLength = Math.floor(this.data.length * 0.0625);
+    const midsLength = Math.floor(this.data.length * 0.375);
 
     interface IBands {
       [s: string]: Uint8Array;
     }
-    let bands: IBands = {
+    const bands: IBands = {
       base: this.data.slice(0, baseLength),
       lows: this.data.slice(baseLength + 1, baseLength + lowsLength),
       mids: this.data.slice(
@@ -30,7 +30,7 @@ export class AudioData {
     if (!(maxSize < 255)) return;
 
     this.data = this.data.map((value) => {
-      let percent = Math.round((value / 255) * 100) / 100;
+      const percent = Math.round((value / 255) * 100) / 100;
       return maxSize * percent;
     });
   }

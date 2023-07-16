@@ -57,11 +57,11 @@ export class Wave implements IAnimation {
       }
     }
 
-    let points: { x: number; y: number }[] = [{ x: 0, y: height }];
+    const points: { x: number; y: number }[] = [{ x: 0, y: height }];
     for (let i = 0; i <= this._options.count!; i++) {
-      let dataIndex =
+      const dataIndex =
         Math.floor(audioData.data.length / this._options.count!) * i;
-      let dataValue = audioData.data[dataIndex];
+      const dataValue = audioData.data[dataIndex];
       points.push({
         x: Math.floor(width / this._options.count!) * i,
         y: height - dataValue,

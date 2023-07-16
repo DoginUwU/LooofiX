@@ -30,15 +30,14 @@ export class Wave {
   private _audioAnalyser!: AnalyserNode;
   private _canvasElement: HTMLCanvasElement;
   private _canvasContext: CanvasRenderingContext2D;
-  private _checkUpdateTimeout: any;
+  private _audioBufferData: Uint8Array;
 
   constructor(
     videoElement: HTMLVideoElement,
     canvasElement: HTMLCanvasElement
   ) {
     this._canvasElement = canvasElement;
-    // @ts-ignore
-    this._canvasContext = this._canvasElement.getContext("2d");
+    this._canvasContext = this._canvasElement.getContext("2d")!;
 
     this._audioElement = videoElement;
     if (!this._audioSource) {
@@ -49,23 +48,26 @@ export class Wave {
       this._audioAnalyser = this._audioContext.createAnalyser();
     }
 
+    this._audioAnalyser.smoothingTimeConstant = 0.85;
+    this._audioAnalyser.fftSize = 1024;
+    this._audioBufferData = new Uint8Array(
+      this._audioAnalyser.frequencyBinCount
+    );
+
     this._play();
   }
 
   private _play(): void {
     this._audioSource.connect(this._audioAnalyser);
     this._audioSource.connect(this._audioContext.destination);
-    this._audioAnalyser.smoothingTimeConstant = 0.85;
-    this._audioAnalyser.fftSize = 1024;
-    let audioBufferData = new Uint8Array(this._audioAnalyser.frequencyBinCount);
 
-    let tick = () => {
+    const tick = () => {
       if (!this._activeAnimations.length) {
-        this._checkUpdateTimeout = setTimeout(tick, 1000 / 60);
+        setTimeout(tick, 1000);
         return;
       }
-      if (this._checkUpdateTimeout) clearTimeout(this._checkUpdateTimeout);
-      this._audioAnalyser.getByteFrequencyData(audioBufferData);
+
+      this._audioAnalyser.getByteFrequencyData(this._audioBufferData);
       this._canvasContext.clearRect(
         0,
         0,
@@ -73,10 +75,12 @@ export class Wave {
         this._canvasContext.canvas.height
       );
       this._activeAnimations.forEach((animation) => {
-        animation.draw(audioBufferData, this._canvasContext);
+        animation.draw(this._audioBufferData, this._canvasContext);
       });
+
       window.requestAnimationFrame(tick);
     };
+
     tick();
   }
 
