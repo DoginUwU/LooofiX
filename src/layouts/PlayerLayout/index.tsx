@@ -1,16 +1,12 @@
-import React, { memo } from 'react';
-import { Icon } from '@iconify/react';
-
 import Player from '@/components/Player';
-
 import { useMusic } from '@/contexts/MusicContext';
-
-import { createNewWindow } from '@/utils/window';
-import { SyncWindows } from '@/utils/syncWindows';
-
-import style from './styles.module.scss';
-import { useTheme } from '@/contexts/ThemeContext';
 import { useSettings } from '@/contexts/SettingsContext';
+import { useTheme } from '@/contexts/ThemeContext';
+import { SyncWindows } from '@/utils/syncWindows';
+import { createNewWindow } from '@/utils/window';
+import { Icon } from '@iconify/react';
+import { memo } from 'preact/compat';
+import style from './styles.module.scss';
 
 const PlayerLayout: React.FC = () => {
   const useMusicCtx = useMusic();

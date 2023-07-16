@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
-
-import { AudioWavesHelper } from './helper';
-
-import style from './styles.module.scss';
-import { useTheme } from '@/contexts/ThemeContext';
-import { useSettings } from '@/contexts/SettingsContext';
 import { VideoStates, useMusic } from '@/contexts/MusicContext';
+import { useSettings } from '@/contexts/SettingsContext';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useEffect, useState } from 'preact/hooks';
+import { AudioWavesHelper } from './helper';
+import style from './styles.module.scss';
 
 const AudioWaves: React.FC = () => {
   const [audioWavesHelper, setAudioWavesHelper] = useState<AudioWavesHelper>();

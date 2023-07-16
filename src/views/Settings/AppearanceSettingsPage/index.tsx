@@ -1,17 +1,11 @@
-import React from 'react';
 import { AvailableThemes } from '@/@types/theme';
-
-import { useSettings } from '@/contexts/SettingsContext';
-
 import Checkbox from '@/components/Checkbox';
-
-import { cx } from '@/utils/cx';
-
+import { useSettings } from '@/contexts/SettingsContext';
 import { dotNotationToObject } from '@/helpers/dotNotation';
-
+import { cx } from '@/utils/cx';
 import style from './styles.module.scss';
 
-const AppearanceSettingsPage: React.FC = () => {
+const AppearanceSettingsPage = () => {
   const { settings, settings: { appearance }, handleSetSettings } = useSettings();
 
   const availableThemes: AvailableThemes[] = ['light', 'dark'];

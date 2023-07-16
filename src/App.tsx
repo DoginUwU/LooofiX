@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect } from 'preact/hooks';
 import { RouterProvider } from 'react-router-dom';
 
 import { ThemeProvider } from './contexts/ThemeContext';
@@ -10,7 +10,7 @@ import { createDrag } from './utils/draggable';
 import { router } from './routes';
 import './styles/theme.scss';
 
-const App: React.FC = () => {
+const App = () => {
   useEffect(() => {
     createDrag();
   }, []);

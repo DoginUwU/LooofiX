@@ -1,12 +1,10 @@
-import React from 'react';
-
 import Checkbox from '@/components/Checkbox';
 
 import style from './styles.module.scss';
 import { dotNotationToObject } from '@/helpers/dotNotation';
 import { useSettings } from '@/contexts/SettingsContext';
 
-const BehavioursSettingsPage: React.FC = () => {
+const BehavioursSettingsPage = () => {
   const { settings, settings: { behaviours }, handleSetSettings } = useSettings();
 
   const handleSettingsChange = (key: string, value: any) => {

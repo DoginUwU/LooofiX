@@ -1,9 +1,7 @@
 import Button from '@/components/Button';
-import React from 'react';
-
 import style from './styles.module.scss';
 
-const AboutSettingsPage: React.FC = () => {
+const AboutSettingsPage = () => {
   return (
     <div className={style.container}>
       <div className={style.me}>

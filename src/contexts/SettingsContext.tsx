@@ -1,11 +1,11 @@
-import { createContext, PropsWithChildren, useContext, useEffect, useState } from "react";
-
 import { ISettings } from "@/@types/settings";
-import { getSettings, setSettings as setUtilsSettings } from "@/utils/settings";
 import { DEFAULT_SETTINGS } from "@/constants/settings";
-import { SyncWindows } from "@/utils/syncWindows";
-import { setAlwaysOnTop } from "@/utils/behaviours";
 import { deepSameKeys } from "@/helpers/deepChecker";
+import { setAlwaysOnTop } from "@/utils/behaviours";
+import { getSettings, setSettings as setUtilsSettings } from "@/utils/settings";
+import { SyncWindows } from "@/utils/syncWindows";
+import { FunctionComponent, createContext } from "preact";
+import { PropsWithChildren, useContext, useEffect, useState } from "preact/compat";
 
 interface ISettingsContext {
   settings: ISettings;
@@ -15,7 +15,7 @@ interface ISettingsContext {
 
 const SettingsContext = createContext<ISettingsContext>({} as ISettingsContext);
 
-const SettingsProvider: React.FC<PropsWithChildren> = ({ children }) => {
+const SettingsProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
   const [settings, setSettings] = useState<ISettings>(DEFAULT_SETTINGS);
 
   const initializeSettings = async () => {

@@ -1,14 +1,12 @@
-import React from 'react';
 import * as RadixTooltip from '@radix-ui/react-tooltip';
-
 import style from './styles.module.scss';
+import { FunctionComponent } from 'preact';
 
 interface TooltipProps extends RadixTooltip.TooltipProps {
   content: string;
-  children: React.ReactNode;
 }
 
-const Tooltip: React.FC<TooltipProps> = ({ children, content, ...args }) => {
+const Tooltip: FunctionComponent<TooltipProps> = ({ children, content, ...args }) => {
   return (
     <RadixTooltip.Root delayDuration={500} {...args}>
       <RadixTooltip.Trigger  asChild>

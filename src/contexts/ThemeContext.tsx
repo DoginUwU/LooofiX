@@ -1,10 +1,9 @@
-import { createContext, FunctionComponent, PropsWithChildren, useContext, useEffect, useState } from "react";
-
+import { AvailableThemes, ITheme } from "@/@types/theme";
 import darkTheme from "@/styles/darkTheme";
 import lightTheme from "@/styles/lightTheme";
-
-import { AvailableThemes, ITheme } from "@/@types/theme";
 import { SyncWindows } from "@/utils/syncWindows";
+import { FunctionComponent, createContext } from "preact";
+import { PropsWithChildren, useContext, useEffect, useState } from "preact/compat";
 import { useSettings } from "./SettingsContext";
 
 

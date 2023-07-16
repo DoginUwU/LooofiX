@@ -1,17 +1,15 @@
-import { FC, useEffect, useState } from 'react';
-import { Icon } from '@iconify/react';
-
 import { cx } from '@/utils/cx';
-
+import { Icon } from '@iconify/react';
+import { FunctionalComponent, JSX } from 'preact';
+import { useEffect, useState } from 'preact/hooks';
 import { ITEMS } from './helper';
-
 import style from './styles.module.scss';
 
 interface IProps {
   onTabChange: (tab: JSX.Element) => void;
 }
 
-const SettingsSidebar: FC<IProps> = ({ onTabChange }) => {
+const SettingsSidebar: FunctionalComponent<IProps> = ({ onTabChange }) => {
   const [activeTab, setActiveTab] = useState('general');
 
   const hasActiveTab = (tab: string) => activeTab === tab;

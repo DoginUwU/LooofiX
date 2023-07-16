@@ -1,7 +1,7 @@
 import { rmSync } from 'fs'
 import path from 'path'
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import preact from '@preact/preset-vite'
 import electron from 'vite-electron-plugin'
 import { customStart, loadViteEnv } from 'vite-electron-plugin/plugin'
 import renderer from 'vite-plugin-electron-renderer'
@@ -18,7 +18,7 @@ export default defineConfig({
     },
   },
   plugins: [
-    react(),
+    preact(),
     electron({
       include: [
         'electron',

@@ -1,18 +1,14 @@
-import React, { memo } from 'react';
-import { Icon } from '@iconify/react';
-import Marquee from "react-fast-marquee";
-
-import { useSettings } from '@/contexts/SettingsContext';
 import { useMusic } from '@/contexts/MusicContext';
-
+import { useSettings } from '@/contexts/SettingsContext';
 import { cx } from '@/utils/cx';
-
-import { formatElapsedTime, getPlayButtonIcon } from './helper';
+import { Icon } from '@iconify/react';
+import { memo } from 'preact/compat';
+import Marquee from "react-fast-marquee";
 import AudioWaves from '../AudioWaves';
-
+import { formatElapsedTime, getPlayButtonIcon } from './helper';
 import style from './styles.module.scss';
 
-const Player: React.FC = () => {
+const Player = () => {
   const { handleNextMusic, handlePreviousMusic, currentMusic, handlePlay, currentState, elapsedTime } = useMusic();
   const { settings } = useSettings();
 

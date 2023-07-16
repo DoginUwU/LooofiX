@@ -1,30 +1,40 @@
-import React, { memo } from 'react';
-import { Icon } from '@iconify/react';
-import { Provider as TooltipProvider } from '@radix-ui/react-tooltip';
-
 import Button from '@/components/Button';
 import Tooltip from '@/components/Tooltip';
-
 import { VideoStates, useMusic } from '@/contexts/MusicContext';
-
 import { cx } from '@/utils/cx';
-
+import { Icon } from '@iconify/react';
+import { Provider as TooltipProvider } from '@radix-ui/react-tooltip';
+import { memo } from 'preact/compat';
 import style from './styles.module.scss';
 
-const GeneralSettingsPage: React.FC = () => {
+const GeneralSettingsPage = () => {
   const { playlist, currentMusicIndex, currentState, handleByIndexMusic, handlePlay } = useMusic();
 
   const isMusicActive = (index: number) => currentMusicIndex === index;
 
-  const PlayIcon: React.FC<any> = ({ index }) => {
-    if (!isMusicActive(index)) return <Icon icon="mdi:play" fontSize={18} />;
+  const getIcon = (index: number) => {
+    if (!isMusicActive(index)) return "mdi:play"
 
     switch (currentState) {
       case VideoStates.PLAYING:
       case VideoStates.BUFFERING:
-        return <Icon icon="mdi:pause" fontSize={18} color="var(--link)" />;
+        return "mdi:pause"
       case VideoStates.PAUSED:
-        return <Icon icon="mdi:play" fontSize={18} color="var(--link)" />;
+        return "mdi:play"
+      default:
+        return null;
+    }
+  }
+
+  const getIconColor = (index: number) => {
+    if (!isMusicActive(index)) return null
+
+    switch (currentState) {
+      case VideoStates.PLAYING:
+      case VideoStates.BUFFERING:
+        return "var(--link)"
+      case VideoStates.PAUSED:
+        return "var(--link)"
       default:
         return null;
     }
@@ -55,7 +65,7 @@ const GeneralSettingsPage: React.FC = () => {
               <tr key={music.url} className={cx({ [style.activeMusic]: isMusicActive(index) })}>
                 <td>
                   <Button onClick={() => handlePlayMusic(index)}>
-                    <PlayIcon index={index} />
+                    <Icon icon={getIcon(index)} fontSize={18} color={getIconColor(index)} />;
                   </Button>
                 </td>
                 <td>

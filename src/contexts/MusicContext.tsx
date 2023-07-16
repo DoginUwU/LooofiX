@@ -1,10 +1,8 @@
-import { createContext, FunctionComponent, PropsWithChildren, useContext, useEffect, useRef, useState } from "react";
-
 import { IMusic } from "@/@types/music";
-
 import { DEFAULT_MUSIC_PLAYLIST } from "@/constants/music";
-
 import { SyncWindows } from "@/utils/syncWindows";
+import { FunctionComponent, createContext } from "preact";
+import { PropsWithChildren, useContext, useEffect, useRef, useState } from "preact/compat";
 
 export const VideoStates = {
   UNSTARTED: -1,
@@ -78,6 +76,14 @@ const MusicProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
     }
   }
 
+  const syncState = () => {
+    if (!audioRef.current) return;
+
+    const state = audioRef.current.paused ? VideoStates.PAUSED : VideoStates.PLAYING;
+
+    setCurrentState(state);
+  }
+
   const handleTimeUpdate = () => {
     if (!audioRef.current) return;
 
@@ -87,14 +93,14 @@ const MusicProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
     if(!audioRef.current) return;
 
-    audioRef.current.crossOrigin = "anonymous";
-
-    handlePlay()
-
     audioRef.current.addEventListener('timeupdate', handleTimeUpdate);
+    audioRef.current.addEventListener('play', syncState);
+    audioRef.current.addEventListener('pause', syncState);
 
     return () => {
       audioRef.current?.removeEventListener('timeupdate', handleTimeUpdate);
+      audioRef.current?.removeEventListener('play', syncState);
+      audioRef.current?.removeEventListener('pause', syncState);
     }
   }, [audioRef.current])
 
@@ -112,7 +118,7 @@ const MusicProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
       handlePreviousMusic,
       setCurrentMusicIndex,
     }}>
-      <audio ref={audioRef} src={currentMusic.url} />
+      <audio ref={audioRef} src={currentMusic.url} autoPlay crossOrigin="anonymous" />
       {children}
     </MusicContext.Provider>
   );

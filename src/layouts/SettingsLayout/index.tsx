@@ -1,15 +1,13 @@
-import React, { memo, useState } from 'react';
-
 import SettingsSidebar from '@/components/SettingsSidebar';
-
 import { useMusic } from '@/contexts/MusicContext';
-
-import { SyncWindows } from '@/utils/syncWindows';
-
-import style from './styles.module.scss';
-import { useTheme } from '@/contexts/ThemeContext';
 import { useSettings } from '@/contexts/SettingsContext';
+import { useTheme } from '@/contexts/ThemeContext';
+import { SyncWindows } from '@/utils/syncWindows';
 import { closeWindow } from '@/utils/window';
+import { memo } from 'preact/compat';
+import { useState } from 'preact/hooks';
+import { JSX } from 'preact/jsx-runtime';
+import style from './styles.module.scss';
 
 const SettingsLayout: React.FC = () => {
   const [activeTab, setActiveTab] = useState<JSX.Element | null>(null);
