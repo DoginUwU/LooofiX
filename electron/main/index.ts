@@ -56,7 +56,6 @@ async function createWindow() {
       preload,
       nodeIntegration: true,
       contextIsolation: false,
-      webSecurity: false,
     },
   });
 

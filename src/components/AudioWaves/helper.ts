@@ -10,18 +10,18 @@ class AudioWavesHelper {
 
   constructor(
     private canvas?: HTMLCanvasElement,
-    private video?: HTMLVideoElement,
+    private audio?: HTMLAudioElement,
     private theme?: ITheme,
     private settings?: ISettings
   ) {
     if (!this.canvas) {
       throw new Error("No canvas element provided");
     }
-    if (!this.video) {
-      throw new Error("No video element provided");
+    if (!this.audio) {
+      throw new Error("No audio element provided");
     }
 
-    this.wave = new Wave(this.video, this.canvas);
+    this.wave = new Wave(this.audio, this.canvas);
 
     this.createAnimations();
 

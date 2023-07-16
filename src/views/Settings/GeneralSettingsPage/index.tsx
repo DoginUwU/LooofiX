@@ -5,27 +5,25 @@ import { Provider as TooltipProvider } from '@radix-ui/react-tooltip';
 import Button from '@/components/Button';
 import Tooltip from '@/components/Tooltip';
 
-import { useYoutube, YoutubeVideoStates } from '@/contexts/YoutubeContext';
-import { useMusic } from '@/contexts/MusicContext';
+import { VideoStates, useMusic } from '@/contexts/MusicContext';
 
 import { cx } from '@/utils/cx';
 
 import style from './styles.module.scss';
 
 const GeneralSettingsPage: React.FC = () => {
-  const { playlist, currentMusicIndex, handleByIndexMusic } = useMusic();
-  const { videoState, handlePlay } = useYoutube();
+  const { playlist, currentMusicIndex, currentState, handleByIndexMusic, handlePlay } = useMusic();
 
   const isMusicActive = (index: number) => currentMusicIndex === index;
 
   const PlayIcon: React.FC<any> = ({ index }) => {
     if (!isMusicActive(index)) return <Icon icon="mdi:play" fontSize={18} />;
 
-    switch (videoState) {
-      case YoutubeVideoStates.PLAYING:
-      case YoutubeVideoStates.BUFFERING:
+    switch (currentState) {
+      case VideoStates.PLAYING:
+      case VideoStates.BUFFERING:
         return <Icon icon="mdi:pause" fontSize={18} color="var(--link)" />;
-      case YoutubeVideoStates.PAUSED:
+      case VideoStates.PAUSED:
         return <Icon icon="mdi:play" fontSize={18} color="var(--link)" />;
       default:
         return null;
@@ -54,7 +52,7 @@ const GeneralSettingsPage: React.FC = () => {
           </thead>
           <tbody>
             {playlist.map((music, index) => (
-              <tr key={music.id} className={cx({ [style.activeMusic]: isMusicActive(index) })}>
+              <tr key={music.url} className={cx({ [style.activeMusic]: isMusicActive(index) })}>
                 <td>
                   <Button onClick={() => handlePlayMusic(index)}>
                     <PlayIcon index={index} />

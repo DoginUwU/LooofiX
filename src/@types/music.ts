@@ -1,5 +1,5 @@
 interface IMusic {
-  id: string;
+  url: string;
   title: string;
 }
 

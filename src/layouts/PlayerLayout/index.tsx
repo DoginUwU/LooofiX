@@ -1,11 +1,9 @@
 import React, { memo } from 'react';
 import { Icon } from '@iconify/react';
 
-import Iframe from '@/components/Iframe';
 import Player from '@/components/Player';
 
 import { useMusic } from '@/contexts/MusicContext';
-import { useYoutube } from '@/contexts/YoutubeContext';
 
 import { createNewWindow } from '@/utils/window';
 import { SyncWindows } from '@/utils/syncWindows';
@@ -16,11 +14,10 @@ import { useSettings } from '@/contexts/SettingsContext';
 
 const PlayerLayout: React.FC = () => {
   const useMusicCtx = useMusic();
-  const useYoutubeCtx = useYoutube();
   const useThemeCtx = useTheme();
   const useSettingsCtx = useSettings();
 
-  new SyncWindows(useYoutubeCtx, useMusicCtx, useThemeCtx, useSettingsCtx);
+  new SyncWindows(useMusicCtx, useThemeCtx, useSettingsCtx);
 
   return (
     <main id="draggable">
@@ -29,7 +26,6 @@ const PlayerLayout: React.FC = () => {
           <Icon icon="bi:three-dots" />
         </button>
       </div>
-      <Iframe />
       <Player />
     </main>
   );

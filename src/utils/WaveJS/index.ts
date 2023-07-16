@@ -33,13 +33,13 @@ export class Wave {
   private _audioBufferData: Uint8Array;
 
   constructor(
-    videoElement: HTMLVideoElement,
+    audioElement: HTMLAudioElement,
     canvasElement: HTMLCanvasElement
   ) {
     this._canvasElement = canvasElement;
     this._canvasContext = this._canvasElement.getContext("2d")!;
 
-    this._audioElement = videoElement;
+    this._audioElement = audioElement;
     if (!this._audioSource) {
       this._audioContext = new AudioContext();
       this._audioSource = this._audioContext.createMediaElementSource(

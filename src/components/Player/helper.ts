@@ -1,4 +1,4 @@
-import { YoutubeVideoStates } from "@/contexts/YoutubeContext";
+import { VideoStates } from "@/contexts/MusicContext";
 import moment from "moment";
 
 const formatElapsedTime = (seconds: number) => {
@@ -7,9 +7,9 @@ const formatElapsedTime = (seconds: number) => {
 
 const getPlayButtonIcon = (state: number) => {
   switch (state) {
-    case YoutubeVideoStates.PLAYING:
+    case VideoStates.PLAYING:
       return "bi:pause-fill";
-    case YoutubeVideoStates.PAUSED:
+    case VideoStates.PAUSED:
       return "bi:play-fill";
     default:
       return "bi:play-fill";

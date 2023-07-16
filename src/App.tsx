@@ -4,7 +4,6 @@ import { RouterProvider } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { SettingsProvider } from './contexts/SettingsContext';
 import { MusicProvider } from './contexts/MusicContext';
-import { YoutubeProvider } from './contexts/YoutubeContext';
 
 import { createDrag } from './utils/draggable';
 
@@ -20,9 +19,7 @@ const App: React.FC = () => {
     <SettingsProvider>
       <ThemeProvider>
         <MusicProvider>
-          <YoutubeProvider>
-            <RouterProvider router={router} />
-          </YoutubeProvider>
+          <RouterProvider router={router} />
         </MusicProvider>
       </ThemeProvider>
     </SettingsProvider>

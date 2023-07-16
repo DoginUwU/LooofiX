@@ -2,12 +2,8 @@ import { IMusic } from "@/@types/music";
 
 const DEFAULT_MUSIC_PLAYLIST: IMusic[] = [
   {
-    id: "jfKfPfyJRdk",
-    title: "lofi hip hop radio - beats to relax/study to",
-  },
-  {
-    id: "rUxyKA_-grg",
-    title: "lofi hip hop radio - beats to sleep/chill to",
+    url: "http://198.245.60.88:8080/stream/1/",
+    title: "Planet LoFi",
   },
 ];
 

@@ -3,7 +3,6 @@ import React, { memo, useState } from 'react';
 import SettingsSidebar from '@/components/SettingsSidebar';
 
 import { useMusic } from '@/contexts/MusicContext';
-import { useYoutube } from '@/contexts/YoutubeContext';
 
 import { SyncWindows } from '@/utils/syncWindows';
 
@@ -15,11 +14,10 @@ import { closeWindow } from '@/utils/window';
 const SettingsLayout: React.FC = () => {
   const [activeTab, setActiveTab] = useState<JSX.Element | null>(null);
   const useMusicCtx = useMusic();
-  const useYoutubeCtx = useYoutube();
   const useThemeCtx = useTheme();
   const useSettingsCtx = useSettings();
 
-  new SyncWindows(useYoutubeCtx, useMusicCtx, useThemeCtx, useSettingsCtx);
+  new SyncWindows(useMusicCtx, useThemeCtx, useSettingsCtx);
 
   const handleTabChange = (tab: JSX.Element) => {
     setActiveTab(tab);
