@@ -9,7 +9,7 @@ import { useState } from 'preact/hooks';
 import { JSX } from 'preact/jsx-runtime';
 import style from './styles.module.scss';
 
-const SettingsLayout: React.FC = () => {
+const SettingsLayout = () => {
   const [activeTab, setActiveTab] = useState<JSX.Element | null>(null);
   const useMusicCtx = useMusic();
   const useThemeCtx = useTheme();

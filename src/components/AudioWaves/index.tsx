@@ -5,7 +5,7 @@ import { useEffect, useState } from 'preact/hooks';
 import { AudioWavesHelper } from './helper';
 import style from './styles.module.scss';
 
-const AudioWaves: React.FC = () => {
+const AudioWaves = () => {
   const [audioWavesHelper, setAudioWavesHelper] = useState<AudioWavesHelper>();
   const { theme } = useTheme();
   const { settings } = useSettings();

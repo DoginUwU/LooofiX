@@ -8,7 +8,7 @@ import { Icon } from '@iconify/react';
 import { memo } from 'preact/compat';
 import style from './styles.module.scss';
 
-const PlayerLayout: React.FC = () => {
+const PlayerLayout = () => {
   const useMusicCtx = useMusic();
   const useThemeCtx = useTheme();
   const useSettingsCtx = useSettings();
