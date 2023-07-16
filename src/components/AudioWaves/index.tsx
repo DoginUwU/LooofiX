@@ -26,7 +26,6 @@ const AudioWaves: React.FC = () => {
         setAudioWavesHelper(new AudioWavesHelper(canvas, audioElement, theme, settings))
       }, 5000)
     }
-
   }, [currentState]);
 
   useEffect(() => {
