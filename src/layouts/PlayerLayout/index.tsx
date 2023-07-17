@@ -13,17 +13,17 @@ const PlayerLayout = () => {
   const useThemeCtx = useTheme();
   const useSettingsCtx = useSettings();
 
-  const { handlePlay, audioRef, currentMusic } = useMusicCtx;
+  const { handlePlay, audioRef, currentMusic, currentMusicURL } = useMusicCtx;
 
   useEffect(() => {
     SyncWindows.addFunctions(useMusicCtx, useThemeCtx, useSettingsCtx);
-    
+
     handlePlay();
   }, []);
 
   return (
     <main id="draggable">
-      <audio ref={audioRef} src={currentMusic?.url} crossOrigin="anonymous" />
+      <audio ref={audioRef} src={currentMusicURL} crossOrigin="anonymous" />
       <div className={style.topBar}>
         <button onClick={openSettings}>
           <Icon icon="bi:three-dots" />

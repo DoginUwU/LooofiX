@@ -1,5 +1,4 @@
-import { IMusic } from "@/@types/music";
-import { DEFAULT_MUSIC_PLAYLIST } from "@/constants/music";
+import { IStream, getAllStreams } from "@/services/stream";
 import SyncWindows from "@/utils/syncWindows";
 import { FunctionComponent, createContext } from "preact";
 import { PropsWithChildren, useContext, useEffect, useRef, useState } from "preact/compat";
@@ -14,10 +13,11 @@ export const VideoStates = {
 }
 
 interface IMusicContext {
-  playlist: IMusic[];
+  playlist: IStream[];
   elapsedTime: number;
   currentState: number;
-  currentMusic: IMusic | null;
+  currentMusic: IStream | null;
+  currentMusicURL: string;
   currentMusicIndex: number;
   audioRef: React.RefObject<HTMLAudioElement>;
   setCurrentMusicIndex: (index: number) => void;
@@ -30,8 +30,9 @@ interface IMusicContext {
 const MusicContext = createContext<IMusicContext>({} as IMusicContext);
 
 const MusicProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
-  const [playlist, setPlaylist] = useState<IMusic[]>(DEFAULT_MUSIC_PLAYLIST);
+  const [playlist, setPlaylist] = useState<IStream[]>([]);
   const [currentMusicIndex, setCurrentMusicIndex] = useState<number>(0);
+  const [currentMusicURL, setCurrentMusicURL] = useState<string>('');
   const [elapsedTime, setElapsedTime] = useState<number>(0);
   const [currentState, setCurrentState] = useState<number>(VideoStates.UNSTARTED);
   const currentMusic = playlist[currentMusicIndex];
@@ -92,6 +93,22 @@ const MusicProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
     setElapsedTime(audioRef.current.currentTime);
   }
 
+  const updatePlaylist = async () => {
+    const playlist = await getAllStreams();
+
+    setPlaylist(playlist);
+  }
+
+  useEffect(() => {
+    updatePlaylist()
+  }, [])
+
+  useEffect(() => {
+    if (!currentMusic) return;
+
+    setCurrentMusicURL(`${import.meta.env.VITE_API_URL}/streams/${currentMusic.id}/play`);
+  }, [currentMusic])
+
   useEffect(() => {
     if(!audioRef.current) return;
 
@@ -119,6 +136,7 @@ const MusicProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
       handleNextMusic,
       handlePreviousMusic,
       setCurrentMusicIndex,
+      currentMusicURL,
     }}>
       {children}
     </MusicContext.Provider>
