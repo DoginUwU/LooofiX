@@ -1,8 +1,8 @@
-import { createHashRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import PlayerLayout from "@/layouts/PlayerLayout";
 import SettingsLayout from "@/layouts/SettingsLayout";
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     path: "/",
     element: <PlayerLayout />,

@@ -1,11 +1,12 @@
-import { ipcRenderer } from "electron";
+import { invoke } from "@tauri-apps/api";
+import { appWindow } from "@tauri-apps/api/window";
 
-const createNewWindow = async () => {
-  ipcRenderer.invoke("open-win", "/settings");
+const openSettings = async () => {
+  await invoke("open_settings");
 };
 
 const closeWindow = () => {
-  ipcRenderer.invoke("close-win");
+  appWindow.close();
 };
 
-export { createNewWindow, closeWindow };
+export { openSettings, closeWindow };

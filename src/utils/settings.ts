@@ -1,12 +1,12 @@
 import { ISettings } from "@/@types/settings";
-import { ipcRenderer } from "electron";
+import { store } from "./store";
 
-const setSettings = (settings: ISettings) => {
-  ipcRenderer.invoke("save-settings", settings);
+const setSettings = async (settings: ISettings) => {
+  await store.set("settings", settings);
 };
 
 const getSettings = async (): Promise<ISettings | null> => {
-  return ipcRenderer.invoke("get-settings");
+  return store.get<ISettings>("settings");
 };
 
 export { setSettings, getSettings };

@@ -1,6 +1,6 @@
 import { IMusic } from "@/@types/music";
 import { DEFAULT_MUSIC_PLAYLIST } from "@/constants/music";
-import { SyncWindows } from "@/utils/syncWindows";
+import SyncWindows from "@/utils/syncWindows";
 import { FunctionComponent, createContext } from "preact";
 import { PropsWithChildren, useContext, useEffect, useRef, useState } from "preact/compat";
 
@@ -37,41 +37,43 @@ const MusicProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
   const currentMusic = playlist[currentMusicIndex];
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  const handleNextMusic = (__syncCall?: boolean) => {
+  const handleNextMusic = () => {
     let nextMusicIndex = currentMusicIndex + 1;
     if (currentMusicIndex === playlist.length - 1) {
       nextMusicIndex = 0;
     }
 
     setCurrentMusicIndex(nextMusicIndex);
-    if(!__syncCall) SyncWindows.send('setCurrentMusicIndex', nextMusicIndex);
+    SyncWindows.send('setCurrentMusicIndex', nextMusicIndex);
   }
 
-  const handlePreviousMusic = (__syncCall?: boolean) => {
+  const handlePreviousMusic = () => {
     let previousMusicIndex = currentMusicIndex - 1;
     if (!currentMusicIndex) {
       previousMusicIndex = playlist.length - 1;
     }
 
     setCurrentMusicIndex(previousMusicIndex);
-    if(!__syncCall) SyncWindows.send('setCurrentMusicIndex', previousMusicIndex);
+    SyncWindows.send('setCurrentMusicIndex', previousMusicIndex);
   }
 
-  const handleByIndexMusic = (index: number, __syncCall?: boolean) => {
+  const handleByIndexMusic = (index: number) => {
     if (!playlist[index]) return;
 
     setCurrentMusicIndex(index);
-    if(!__syncCall) SyncWindows.send('handleByIndexMusic', index);
+    SyncWindows.send('handleByIndexMusic', index);
   }
 
   const handlePlay = () => {
-    if (!audioRef.current) return;
+    if (!audioRef.current) {
+      SyncWindows.send('handlePlay');
+    }
 
     if (currentState === VideoStates.PLAYING) {
-      audioRef.current.pause();
+      audioRef.current?.pause();
       setCurrentState(VideoStates.PAUSED);
     } else {
-      audioRef.current.play();
+      audioRef.current?.play();
       setCurrentState(VideoStates.PLAYING);
     }
   }
@@ -118,7 +120,6 @@ const MusicProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
       handlePreviousMusic,
       setCurrentMusicIndex,
     }}>
-      <audio ref={audioRef} src={currentMusic.url} autoPlay crossOrigin="anonymous" />
       {children}
     </MusicContext.Provider>
   );

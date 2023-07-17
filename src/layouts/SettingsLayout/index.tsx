@@ -2,10 +2,10 @@ import SettingsSidebar from '@/components/SettingsSidebar';
 import { useMusic } from '@/contexts/MusicContext';
 import { useSettings } from '@/contexts/SettingsContext';
 import { useTheme } from '@/contexts/ThemeContext';
-import { SyncWindows } from '@/utils/syncWindows';
+import SyncWindows from '@/utils/syncWindows';
 import { closeWindow } from '@/utils/window';
 import { memo } from 'preact/compat';
-import { useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 import { JSX } from 'preact/jsx-runtime';
 import style from './styles.module.scss';
 
@@ -15,15 +15,17 @@ const SettingsLayout = () => {
   const useThemeCtx = useTheme();
   const useSettingsCtx = useSettings();
 
-  new SyncWindows(useMusicCtx, useThemeCtx, useSettingsCtx);
-
   const handleTabChange = (tab: JSX.Element) => {
     setActiveTab(tab);
   }
 
+  useEffect(() => {
+    SyncWindows.addFunctions(useMusicCtx, useThemeCtx, useSettingsCtx);
+  }, [])
+
   return (
     <main className={style.container}>
-      <div className={style.topBar}>
+      <div className={style.topBar} id="draggable">
         <div className={style.topBarTitle}>
           <h1>Settings</h1>
         </div>

@@ -1,7 +1,7 @@
-import { ipcRenderer } from "electron";
+import { appWindow } from '@tauri-apps/api/window';
 
 const setAlwaysOnTop = (value: boolean) => {
-  ipcRenderer.invoke("set-always-on-top", value);
+  appWindow.setAlwaysOnTop(value);
 };
 
 export { setAlwaysOnTop };

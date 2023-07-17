@@ -3,7 +3,7 @@ import { DEFAULT_SETTINGS } from "@/constants/settings";
 import { deepSameKeys } from "@/helpers/deepChecker";
 import { setAlwaysOnTop } from "@/utils/behaviours";
 import { getSettings, setSettings as setUtilsSettings } from "@/utils/settings";
-import { SyncWindows } from "@/utils/syncWindows";
+import SyncWindows from "@/utils/syncWindows";
 import { FunctionComponent, createContext } from "preact";
 import { PropsWithChildren, useContext, useEffect, useState } from "preact/compat";
 
@@ -28,11 +28,11 @@ const SettingsProvider: FunctionComponent<PropsWithChildren> = ({ children }) =>
     setSettings(settings);
   }
 
-  const handleSetSettings = (settings: ISettings, __syncCall?: boolean) => {
+  const handleSetSettings = (settings: ISettings) => {
     setSettings(settings);
     setUtilsSettings(settings);
 
-    if(!__syncCall) SyncWindows.send('initializeSettings');
+    SyncWindows.send('initializeSettings');
   }
 
   useEffect(() => {

@@ -6,18 +6,18 @@ import { AudioWavesHelper } from './helper';
 import style from './styles.module.scss';
 
 const AudioWaves = () => {
-  const [audioWavesHelper, setAudioWavesHelper] = useState<AudioWavesHelper>();
+  const [audioWavesHelper, setAudioWavesHelper] = useState<AudioWavesHelper | null>(null);
   const { theme } = useTheme();
   const { settings } = useSettings();
-  const { currentState, audioRef } = useMusic();
+  const { audioRef } = useMusic();
 
   useEffect(() => {
-    if(currentState !== VideoStates.PLAYING) return;
+    if (audioWavesHelper) return;
 
     const canvas = document.getElementById('wave-canvas') as HTMLCanvasElement;
     const audioElement = audioRef.current;
 
-    if(!audioElement) return;
+    if (!audioElement) return;
 
     try {
       setAudioWavesHelper(new AudioWavesHelper(canvas, audioElement, theme, settings))
@@ -26,7 +26,7 @@ const AudioWaves = () => {
         setAudioWavesHelper(new AudioWavesHelper(canvas, audioElement, theme, settings))
       }, 5000)
     }
-  }, [currentState]);
+  }, [audioRef.current]);
 
   useEffect(() => {
     audioWavesHelper?.setTheme(theme);

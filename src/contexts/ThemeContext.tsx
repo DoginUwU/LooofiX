@@ -1,7 +1,7 @@
 import { AvailableThemes, ITheme } from "@/@types/theme";
 import darkTheme from "@/styles/darkTheme";
 import lightTheme from "@/styles/lightTheme";
-import { SyncWindows } from "@/utils/syncWindows";
+import SyncWindows from "@/utils/syncWindows";
 import { FunctionComponent, createContext } from "preact";
 import { PropsWithChildren, useContext, useEffect, useState } from "preact/compat";
 import { useSettings } from "./SettingsContext";
@@ -19,7 +19,7 @@ const ThemeProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
   const [themeString, setThemeString] = useState<AvailableThemes>(settings.appearance.theme);
   const theme = themeString === "light" ? lightTheme : darkTheme;
 
-  const handleTheme = (theme: AvailableThemes, __syncCall?: boolean) => {
+  const handleTheme = (theme: AvailableThemes) => {
     setThemeString(theme);
     const app = document.getElementById("root");
     if(theme === "light") {
@@ -28,7 +28,7 @@ const ThemeProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
       app?.classList.add("theme-dark");
     }
 
-    if (!__syncCall) SyncWindows.send("handleTheme", theme);
+    SyncWindows.send("handleTheme", theme);
   }
 
   useEffect(() => {

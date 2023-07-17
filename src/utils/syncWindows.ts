@@ -1,49 +1,54 @@
-import { ipcRenderer } from "electron";
-
-type ISync = [string, any[]];
+import { invoke } from "@tauri-apps/api";
+import { listen } from '@tauri-apps/api/event'
 
 interface IContexts {
   [key: string]: any;
 }
 
 class SyncWindows {
+  private winId: string = "";
   private functions: Array<IContexts> = [];
-  public static instance: SyncWindows;
 
-  constructor(...functions: Array<IContexts>) {
-    if (SyncWindows.instance) return;
-    console.log("[SYNC] initialized on new Window");
+  constructor() {
+    this.winId = Math.random().toString(36)
 
-    SyncWindows.instance = this;
-    this.functions = functions;
+    console.log("[SYNC] initialized on new Window ID: ", this.winId);
 
-    ipcRenderer.invoke("get-sync-history").then((history: ISync[]) => {
-      history.forEach(([functionName, ...args]) => {
-        this.sync(functionName, ...args);
-        console.log("[SYNC] GET 1", functionName, ...args);
-      });
-    });
+    listen("sync-internal", (event) => {
+      const payload = event.payload;
+      if(!payload || !(payload instanceof Array)) return;
 
-    ipcRenderer.on("sync-internal", (_, functionName, ...args) => {
+      const [winId, functionName, ...args] = payload;
+
+      if(this.winId === winId) return;
+
       this.sync(functionName, ...args);
       console.log("[SYNC] GET 2", functionName, ...args);
-    });
+    })
+  }
+
+  public addFunctions(...functions: Array<IContexts>) {
+    this.functions.push(...functions);
   }
 
   public sync(functionName: string, ...args: any) {
     this.functions.forEach((funcs) => {
+      console.log(funcs.hasOwnProperty(functionName))
       if (funcs.hasOwnProperty(functionName)) {
         if (typeof funcs[functionName] === "function") {
-          funcs[functionName](...args, true);
+          funcs[functionName](...args);
         }
       }
     });
   }
 
-  public static send(functionName: string, ...args: any) {
-    ipcRenderer.send("sync", functionName, ...args);
-    console.log("[SYNC] send", functionName, ...args);
+  public send(functionName: string, ...args: any) {
+    invoke("sync", { winId: this.winId, fnName: functionName, args })
+    console.log("[SYNC] send", this.winId, functionName, ...args);
   }
 }
 
-export { SyncWindows };
+const singleton = new SyncWindows();
+Object.freeze(singleton);
+
+export default singleton;

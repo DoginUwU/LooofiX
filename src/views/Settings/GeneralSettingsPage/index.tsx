@@ -22,7 +22,7 @@ const GeneralSettingsPage = () => {
       case VideoStates.PAUSED:
         return "mdi:play"
       default:
-        return null;
+        return "mdi:play";
     }
   }
 
@@ -65,7 +65,7 @@ const GeneralSettingsPage = () => {
               <tr key={music.url} className={cx({ [style.activeMusic]: isMusicActive(index) })}>
                 <td>
                   <Button onClick={() => handlePlayMusic(index)}>
-                    <Icon icon={getIcon(index)} fontSize={18} color={getIconColor(index)} />;
+                    <Icon icon={getIcon(index)} fontSize={18} color={getIconColor(index)} />
                   </Button>
                 </td>
                 <td>

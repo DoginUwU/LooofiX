@@ -2,7 +2,6 @@ import { ISettings } from "@/@types/settings";
 import { ITheme } from "@/@types/theme";
 import { Wave } from "@/utils/WaveJS";
 import Color from "color";
-import { ipcRenderer } from "electron";
 
 class AudioWavesHelper {
   public wave: Wave;
@@ -25,18 +24,18 @@ class AudioWavesHelper {
 
     this.createAnimations();
 
-    ipcRenderer.on("blur", () => {
-      this.blur();
-    });
-    ipcRenderer.on("focus", () => {
-      this.unblur();
-    });
-    ipcRenderer.on("hide", () => {
-      this.blur();
-    });
-    ipcRenderer.on("show", () => {
-      this.unblur();
-    });
+    // ipcRenderer.on("blur", () => {
+    //   this.blur();
+    // });
+    // ipcRenderer.on("focus", () => {
+    //   this.unblur();
+    // });
+    // ipcRenderer.on("hide", () => {
+    //   this.blur();
+    // });
+    // ipcRenderer.on("show", () => {
+    //   this.unblur();
+    // });
   }
 
   public createAnimations() {

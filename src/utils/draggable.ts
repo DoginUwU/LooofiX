@@ -1,4 +1,4 @@
-import { ipcRenderer } from "electron";
+import { appWindow, LogicalPosition } from '@tauri-apps/api/window';
 
 let wX: number;
 let wY: number;
@@ -23,7 +23,7 @@ const createDrag = () => {
       const xLoc = e.screenX - wX;
       const yLoc = e.screenY - wY;
 
-      ipcRenderer.invoke("move-win", xLoc, yLoc);
+      appWindow.setPosition(new LogicalPosition(xLoc, yLoc))
     }
   };
 };
