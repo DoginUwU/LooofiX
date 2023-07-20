@@ -4,6 +4,8 @@ import { useSettings } from '@/contexts/SettingsContext';
 import { dotNotationToObject } from '@/helpers/dotNotation';
 import { cx } from '@/utils/cx';
 import style from './styles.module.scss';
+import { getDocumentAppDir } from '@/helpers/fs';
+import { writeBinaryFile, removeFile } from '@tauri-apps/api/fs';
 
 const AppearanceSettingsPage = () => {
   const { settings, settings: { appearance }, handleSetSettings } = useSettings();
@@ -16,6 +18,30 @@ const AppearanceSettingsPage = () => {
     handleSetSettings({
       ...settings,
       appearance: updatedAppearance,
+    });
+  }
+
+  const handleBackground = async (event: any) => {
+    const file = event.target.files[0];
+    const path = await getDocumentAppDir();
+    const extension = file.name.split('.').pop();
+    const imagePath = `${path}/background.${extension}`;
+
+    try {
+      await removeFile(imagePath);
+    } catch (error) {
+        // expected
+    }
+
+    const fileToWrite = new Uint8Array(await file.arrayBuffer());
+    await writeBinaryFile(imagePath, fileToWrite);
+
+    handleSetSettings({
+      ...settings,
+      appearance: {
+        ...appearance,
+        backgroundImage: imagePath,
+      },
     });
   }
 
@@ -45,6 +71,7 @@ const AppearanceSettingsPage = () => {
           onCheckedChange={(value) => handleSettingsChange('player.onlyShowControlsOnHover', value)}
         />
       </div>
+      <input type="file" onChange={handleBackground} />
     </section>
   )
 }

@@ -2,6 +2,7 @@ import { AvailableThemes } from "./theme";
 
 interface IAppearanceSettings {
   theme: AvailableThemes;
+  backgroundImage?: string;
   player: {
     onlyShowTitleOnHover: boolean;
     onlyShowControlsOnHover: boolean;

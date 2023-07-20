@@ -33,7 +33,6 @@ class SyncWindows {
 
   public sync(functionName: string, ...args: any) {
     this.functions.forEach((funcs) => {
-      console.log(funcs.hasOwnProperty(functionName))
       if (funcs.hasOwnProperty(functionName)) {
         if (typeof funcs[functionName] === "function") {
           funcs[functionName](...args);

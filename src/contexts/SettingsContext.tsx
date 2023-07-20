@@ -1,6 +1,5 @@
 import { ISettings } from "@/@types/settings";
 import { DEFAULT_SETTINGS } from "@/constants/settings";
-import { deepSameKeys } from "@/helpers/deepChecker";
 import { setAlwaysOnTop } from "@/utils/behaviours";
 import { getSettings, setSettings as setUtilsSettings } from "@/utils/settings";
 import SyncWindows from "@/utils/syncWindows";
@@ -19,18 +18,18 @@ const SettingsProvider: FunctionComponent<PropsWithChildren> = ({ children }) =>
   const [settings, setSettings] = useState<ISettings>(DEFAULT_SETTINGS);
 
   const initializeSettings = async () => {
-    let settings = await getSettings();
+    let newSettings = await getSettings();
 
-    if (!settings || !deepSameKeys(settings, DEFAULT_SETTINGS)) {
-      settings = DEFAULT_SETTINGS;
+    if (!newSettings) {
+      newSettings = DEFAULT_SETTINGS;
     }
 
-    setSettings(settings);
+    setSettings(newSettings);
   }
 
-  const handleSetSettings = (settings: ISettings) => {
-    setSettings(settings);
-    setUtilsSettings(settings);
+  const handleSetSettings = (newSettings: ISettings) => {
+    setSettings(newSettings)
+    setUtilsSettings(newSettings);
 
     SyncWindows.send('initializeSettings');
   }

@@ -17,12 +17,23 @@
         "all": false,
         "open": true
       },
+      "fs": {
+        "all": true,
+        "scope": ["$DOCUMENT/*", "$DOCUMENT/looofix/*"]
+      },
+      "path": {
+        "all": true
+      },
       "window": {
         "create": true,
         "close": true,
         "show": true,
         "setAlwaysOnTop": true,
         "setPosition": true
+      },
+      "protocol": {
+        "asset": true,
+        "assetScope": ["$DOCUMENT/looofix/*"]
       }
     },
     "bundle": {
@@ -38,7 +49,7 @@
       ]
     },
     "security": {
-      "csp": null
+      "csp": "default-src 'self'; img-src 'self' asset: https://asset.localhost"
     },
     "windows": [
       {

@@ -9,10 +9,12 @@ import { createDrag } from './utils/draggable';
 
 import { router } from './routes';
 import './styles/theme.scss';
+import { createDocumentAppDir } from './helpers/fs';
 
 const App = () => {
   useEffect(() => {
     createDrag();
+    createDocumentAppDir();
   }, []);
 
   return (
